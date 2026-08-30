@@ -214,7 +214,7 @@ const copy = {
     imagingKicker: 'IMAGE STUDIES / 影像', imagingTitle: <>让设计停留在<br />被感知的瞬间。</>, imagingLead: '记录材质、光线与形态在镜头中的变化，让作品在静止中保持呼吸。', imagingScrollTitle: '向自然借一束光', imagingScrollHint: 'SCROLL TO EXPAND / 向下滚动展开', imagingOverlayKicker: 'IMAGE STUDY / 03', imagingOverlayTitle: '在路径交汇处，重新看见方向。', imagingOverlayLead: '影像不是装饰，而是让设计、环境与人的感受彼此相遇的一种方式。',
     capabilities: 'CAPABILITIES / 能力', capabilityTitle: <>从洞察到落地，<br />保持每一步的清晰。</>, recognition: 'RECOGNITION', recognitionText: <>米兰设计周多项获奖<br />G-Cross 设计大赛铜奖<br />楚怡杯省级奖项</>, software: '掌握的软件',
     contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>让下一件产品，<br />更贴近真实的生活。</>, resume: '获取完整简历', collaboration: <>期待与品牌、团队和创作者展开产品设计合作。<br />联系方式可在更新后的简历中补充。</>,
-    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回产品作品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录',
+    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回产品作品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录', personalImaging: '个人影像', personalImagingTitle: '个人影像即将展开。', personalImagingLead: '这里将记录镜头中的光线、路径与日常片段。摄影作品正在整理中。', backHome: '返回首页',
   },
   en: {
     navAbout: 'About', navProjects: 'Product Work', navImaging: 'Imaging', navCapabilities: 'Capabilities', contact: 'Contact', menu: 'Menu', close: 'Close',
@@ -227,7 +227,7 @@ const copy = {
     imagingKicker: 'IMAGE STUDIES', imagingTitle: <>Let design linger<br />in the moment of perception.</>, imagingLead: 'Material, light, and form move through the lens, keeping a still image alive with atmosphere.', imagingScrollTitle: 'Borrowing light from nature', imagingScrollHint: 'SCROLL TO EXPAND', imagingOverlayKicker: 'IMAGE STUDY / 03', imagingOverlayTitle: 'At the crossing, direction becomes visible.', imagingOverlayLead: 'Imaging is not decoration. It is a way for design, environment, and feeling to meet.',
     capabilities: 'CAPABILITIES', capabilityTitle: <>From insight to making,<br />every step stays clear.</>, recognition: 'RECOGNITION', recognitionText: <>Multiple Milan Design Week selections<br />G-Cross Design Competition / Bronze<br />Chuyi Cup Provincial Award</>, software: 'TOOLS',
     contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>Make the next product<br />feel closer to real life.</>, resume: 'Download résumé', collaboration: <>Open to product design collaborations with brands, teams, and independent makers.<br />Contact details are included in the updated résumé.</>,
-    overview: 'OVERVIEW', visualRecord: 'VISUAL RECORD', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: 'Back to product work', notFound: <>This project has<br />not been archived yet.</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: 'Close project details', workShowcase: 'project showcase', visualRecordAlt: 'visual record',
+    overview: 'OVERVIEW', visualRecord: 'VISUAL RECORD', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: 'Back to product work', notFound: <>This project has<br />not been archived yet.</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: 'Close project details', workShowcase: 'project showcase', visualRecordAlt: 'visual record', personalImaging: 'Personal Imaging', personalImagingTitle: 'Personal imaging, soon.', personalImagingLead: 'A quiet archive of light, paths, and everyday fragments. The photography collection is being prepared.', backHome: 'Back home',
   },
 }
 
@@ -276,7 +276,9 @@ function scrollToId(id) {
 
 function readRoute() {
   const match = window.location.pathname.match(/^\/works\/([^/]+)\/?$/)
-  return match ? { type: 'detail', projectId: decodeURIComponent(match[1]) } : { type: 'home' }
+  if (match) return { type: 'detail', projectId: decodeURIComponent(match[1]) }
+  if (/^\/imaging\/?$/.test(window.location.pathname)) return { type: 'imaging' }
+  return { type: 'home' }
 }
 
 function PointerEffects() {
@@ -455,6 +457,31 @@ function ProjectDetail({ project, onHome, onBack, language }) {
   )
 }
 
+function PersonalImaging({ onHome, language }) {
+  const text = copy[language]
+
+  return (
+    <section className="personal-imaging-page">
+      <div className="shell personal-imaging-inner">
+        <p className="eyebrow"><span /> IMAGE ARCHIVE / 04</p>
+        <div className="personal-imaging-copy">
+          <p className="section-kicker"><span>04</span>{text.personalImaging}</p>
+          <h1>{text.personalImagingTitle}</h1>
+          <p>{text.personalImagingLead}</p>
+          <button className="personal-imaging-back" data-cursor-interactive data-cursor-magnetic onClick={onHome}>
+            <ArrowLeft size={17} /> {text.backHome}
+          </button>
+        </div>
+        <div className="personal-imaging-placeholder" aria-hidden="true">
+          <span>CRTYSS / PERSONAL IMAGING</span>
+          <i />
+          <span>ARCHIVE / 04</span>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function App() {
   const [activeProject, setActiveProject] = useState(null)
   const [route, setRoute] = useState(readRoute)
@@ -509,7 +536,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (route.type === 'detail') window.scrollTo({ top: 0, behavior: 'auto' })
+    if (route.type !== 'home') window.scrollTo({ top: 0, behavior: 'auto' })
     setMobileMenuOpen(false)
   }, [route])
 
@@ -688,6 +715,8 @@ function App() {
           onBack={() => goHome('projects')}
           language={language}
         />
+      ) : route.type === 'imaging' ? (
+        <PersonalImaging onHome={() => goHome('imaging')} language={language} />
       ) : <>
       <section className="hero" id="home" aria-labelledby="hero-title">
         <div className="hero-ui-stage" aria-hidden="true">
@@ -826,6 +855,9 @@ function App() {
               <span className="eyebrow"><span /> {text.imagingOverlayKicker}</span>
               <h3>{text.imagingOverlayTitle}</h3>
               <p>{text.imagingOverlayLead}</p>
+              <button className="imaging-personal-link" data-cursor-interactive data-cursor-magnetic onClick={() => goTo('/imaging')}>
+                {text.personalImaging} <ArrowUpRight size={16} />
+              </button>
               <span className="imaging-scroll-index">03 / 04</span>
             </div>
           </ScrollExpand>
