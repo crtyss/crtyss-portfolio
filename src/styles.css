@@ -190,6 +190,20 @@ html.has-pointer-effects body, html.has-pointer-effects body * { cursor: none; }
 .project-open { display: grid; width: 38px; height: 38px; place-items: center; color: #252527; border-radius: 50%; background: #f5f5f4; transform: translateY(9px); opacity: 0; transition: transform .35s ease, opacity .35s ease; }
 .project-card:hover .project-open, .project-card:focus .project-open { transform: translateY(0); opacity: 1; }
 
+.imaging-section { padding: 140px 0 0; color: #f5f5f4; background: #17191c; }
+.imaging-heading { display: grid; grid-template-columns: .85fr 1.15fr; gap: 20px; align-items: start; }
+.imaging-heading .section-kicker { color: #a5a5aa; }
+.imaging-heading .section-kicker span { color: #f5f5f4; }
+.imaging-heading h2 { max-width: 620px; margin: 0; letter-spacing: 0; font-size: clamp(38px, 3.7vw, 66px); font-weight: 600; line-height: 1.16; }
+.imaging-heading > div:last-child > p { max-width: 440px; margin: 25px 0 0; color: #aaaab0; font-size: 15px; line-height: 1.75; }
+.imaging-scroll-wrap { height: 235vh; margin-top: 70px; }
+.imaging-scroll { width: 100%; height: 100%; }
+.imaging-scroll-overlay { max-width: 660px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.imaging-scroll-overlay .eyebrow { color: rgba(255,255,255,.72); }
+.imaging-scroll-overlay h3 { margin: 0; color: #fff; font-size: clamp(34px, 5vw, 78px); line-height: 1.08; font-weight: 600; letter-spacing: 0; }
+.imaging-scroll-overlay p { max-width: 440px; margin: 0; color: rgba(255,255,255,.78); font-size: 15px; line-height: 1.75; }
+.imaging-scroll-index { margin-top: 12px; color: rgba(255,255,255,.58); font: 10px 'DM Mono', monospace; letter-spacing: .09em; }
+
 .strength-section { padding-top: 150px; padding-bottom: 125px; }
 .strength-head { display: grid; grid-template-columns: .65fr 1.3fr .55fr; gap: 25px; }
 .award-note { padding: 12px 0 0 20px; border-left: 1px solid #bcbcc0; }
@@ -375,6 +389,12 @@ html[data-theme='light'] .project-card::before { border-color: rgba(255,255,255,
 html[data-theme='light'] .project-card h3 { color: #f7f7f6; -webkit-text-stroke: .42px rgba(255,255,255,.5); text-shadow: 0 2px 14px rgba(0,0,0,.68), 0 1px 3px rgba(0,0,0,.5); }
 html[data-theme='light'] .project-card small,
 html[data-theme='light'] .project-card p { text-shadow: 0 1px 9px rgba(0,0,0,.6); }
+html[data-theme='light'] .imaging-section { color: #242426; background: #dedfdd; }
+html[data-theme='light'] .imaging-heading .section-kicker { color: #76767b; }
+html[data-theme='light'] .imaging-heading .section-kicker span { color: #242426; }
+html[data-theme='light'] .imaging-heading > div:last-child > p { color: #69696f; }
+html[data-theme='light'] .imaging-section { background: #dedfdd; }
+html[data-theme='light'] .imaging-scroll .scroll-expand__scrim { background: linear-gradient(to top, rgba(8,18,11,.6), rgba(8,18,11,.04) 52%, rgba(8,18,11,.12)); }
 html[data-theme='light'] .contact-section { color: #242426; background: #f3f3f2; }
 html[data-theme='light'] .contact-art { background: #e5e6e3; }
 html[data-theme='light'] .contact-art img { filter: saturate(.28) contrast(1.05) brightness(1.08); }
@@ -395,6 +415,7 @@ body,
 .hero,
 .hero-ui-stage,
 .project-section,
+.imaging-section,
 .strength-section,
 .contact-section,
 .project-detail { transition: background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease; }
@@ -449,7 +470,9 @@ body,
   .lead { margin-top: 35px; }
   .portrait-card, .bio-card { min-height: 440px; }
   .project-heading, .strength-head { grid-template-columns: 1fr; }
+  .imaging-heading { grid-template-columns: 1fr; }
   .project-grid { grid-auto-rows: 270px; }
+  .imaging-scroll-wrap { height: 235vh; margin-top: 52px; }
   .detail-hero-grid { grid-template-columns: 1fr; gap: 48px; }
   .detail-hero-copy { padding-bottom: 0; }
   .detail-meta { margin-top: 42px; }
@@ -493,7 +516,9 @@ body,
   .facts-grid strong { font-size: 38px; }
   .facts-grid p { margin-top: 17px; font-size: 11px; }
   .project-section { padding: 100px 0; }
+  .imaging-section { padding: 100px 0; }
   .project-grid { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+  .imaging-scroll-wrap { height: 225vh; margin-top: 42px; }
   .project-card { height: 340px; }
   .project-featured { height: 450px; }
   .project-card h3 { font-size: 20px; }

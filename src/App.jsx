@@ -13,6 +13,7 @@ import {
   X,
 } from 'lucide-react'
 import ShinyText from './ShinyText'
+import ScrollExpand from './ScrollExpand'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -203,28 +204,30 @@ const localized = (item, key, language) => language === 'en' && item[`${key}En`]
 
 const copy = {
   zh: {
-    navAbout: '关于我', navProjects: '精选作品', navCapabilities: '能力', contact: '联系我', menu: '菜单', close: '关闭',
-    navigation: 'NAVIGATION / 导航', home: '返回首页', selectedWork: '精选作品', viewProject: '查看项目',
+    navAbout: '关于我', navProjects: '产品作品', navImaging: '影像', navCapabilities: '能力', contact: '联系我', menu: '菜单', close: '关闭',
+    navigation: 'NAVIGATION / 导航', home: '返回首页', selectedWork: '产品作品', viewProject: '查看项目',
     heroEyebrow: 'PRODUCT DESIGN PORTFOLIO / 2024 - 2025', heroLine1: '为日常，', heroLine2: '设计更好的感受。',
-    heroDescription: <>Crtyss 是一名关注人与物关系的产品设计师，<br />以克制的形态，回应真实的使用。</>, seeAbout: '查看个人经历', selectedProjects: 'SELECTED<br />PROJECTS', productDesigner: 'PRODUCT<br />DESIGNER',
+    heroDescription: <>Crtyss 是一名关注人与物关系的产品设计师，<br />以克制的形态，回应真实的使用。</>, seeAbout: '查看个人经历', selectedProjects: 'PRODUCT<br />WORK', productDesigner: 'PRODUCT<br />DESIGNER',
     aboutKicker: 'ABOUT / 关于', aboutTitle: <>为真实生活<br />留下恰好的设计。</>, aboutLead: '从产品形态到使用体验，持续探索设计如何更轻、更准地参与日常。', selfPortrait: 'Crtyss 二次元自画像', profile: 'PROFILE', profileText: '就读于湖南涉外经济学院艺术设计专业。系统学习产品设计理论与实践，重视从具体需求出发完成从概念、建模到呈现和验证的完整表达。', education: 'EDUCATION', school: '湖南涉外经济学院 / 艺术设计', location: 'LOCATION', locationValue: '湖南张家界', locationNote: '开放合作与交流',
     facts: ['设计赛事奖项与作品入选', '学校专项奖学金', '年视觉中国 500px 签约供稿', '覆盖产品、家具、文创等方向'],
-    projectKicker: 'SELECTED WORK / 精选作品', projectTitle: <>让形态服务于<br />更好的体验。</>, projectLead: '从产品概念到视觉呈现，精选十个关注人、空间与文化体验的设计片段。',
+    projectKicker: 'PRODUCT WORK / 产品作品', projectTitle: <>让形态服务于<br />更好的体验。</>, projectLead: '从产品概念到视觉呈现，收录十个关注人、空间与文化体验的设计片段。',
+    imagingKicker: 'IMAGE STUDIES / 影像', imagingTitle: <>让设计停留在<br />被感知的瞬间。</>, imagingLead: '记录材质、光线与形态在镜头中的变化，让作品在静止中保持呼吸。', imagingScrollTitle: '向自然借一束光', imagingScrollHint: 'SCROLL TO EXPAND / 向下滚动展开', imagingOverlayKicker: 'IMAGE STUDY / 03', imagingOverlayTitle: '在路径交汇处，重新看见方向。', imagingOverlayLead: '影像不是装饰，而是让设计、环境与人的感受彼此相遇的一种方式。',
     capabilities: 'CAPABILITIES / 能力', capabilityTitle: <>从洞察到落地，<br />保持每一步的清晰。</>, recognition: 'RECOGNITION', recognitionText: <>米兰设计周多项获奖<br />G-Cross 设计大赛铜奖<br />楚怡杯省级奖项</>, software: '掌握的软件',
     contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>让下一件产品，<br />更贴近真实的生活。</>, resume: '获取完整简历', collaboration: <>期待与品牌、团队和创作者展开产品设计合作。<br />联系方式可在更新后的简历中补充。</>,
-    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回精选作品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录',
+    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回产品作品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录',
   },
   en: {
-    navAbout: 'About', navProjects: 'Selected Work', navCapabilities: 'Capabilities', contact: 'Contact', menu: 'Menu', close: 'Close',
-    navigation: 'NAVIGATION', home: 'Home', selectedWork: 'Selected Work', viewProject: 'View project',
+    navAbout: 'About', navProjects: 'Product Work', navImaging: 'Imaging', navCapabilities: 'Capabilities', contact: 'Contact', menu: 'Menu', close: 'Close',
+    navigation: 'NAVIGATION', home: 'Home', selectedWork: 'Product Work', viewProject: 'View project',
     heroEyebrow: 'PRODUCT DESIGN PORTFOLIO / 2024 - 2025', heroLine1: 'Better objects,', heroLine2: 'for everyday feeling.',
-    heroDescription: <>Crtyss is a product designer interested in the relationship<br />between people and the things they use.</>, seeAbout: 'View profile', selectedProjects: 'SELECTED<br />PROJECTS', productDesigner: 'PRODUCT<br />DESIGNER',
+    heroDescription: <>Crtyss is a product designer interested in the relationship<br />between people and the things they use.</>, seeAbout: 'View profile', selectedProjects: 'PRODUCT<br />WORK', productDesigner: 'PRODUCT<br />DESIGNER',
     aboutKicker: 'ABOUT', aboutTitle: <>Design that stays<br />close to real life.</>, aboutLead: 'From product form to the moments of use, I explore how design can participate in everyday life with more clarity and care.', selfPortrait: 'Crtyss self portrait', profile: 'PROFILE', profileText: 'Product design student at Hunan International Economics University. I work from concrete needs toward a complete expression, from concept and modeling to presentation and validation.', education: 'EDUCATION', school: 'Hunan International Economics University / Product Design', location: 'LOCATION', locationValue: 'Zhangjiajie, Hunan', locationNote: 'Open to collaboration',
     facts: ['design awards & selections', 'school scholarships', 'years as a Visual China / 500px contributor', 'product, furniture & cultural directions'],
-    projectKicker: 'SELECTED WORK', projectTitle: <>Form in service of<br />a better experience.</>, projectLead: 'Ten studies across products, spaces, and cultural experiences, moving from concept to a considered visual language.',
+    projectKicker: 'PRODUCT WORK', projectTitle: <>Form in service of<br />a better experience.</>, projectLead: 'Ten studies across products, spaces, and cultural experiences, moving from concept to a considered visual language.',
+    imagingKicker: 'IMAGE STUDIES', imagingTitle: <>Let design linger<br />in the moment of perception.</>, imagingLead: 'Material, light, and form move through the lens, keeping a still image alive with atmosphere.', imagingScrollTitle: 'Borrowing light from nature', imagingScrollHint: 'SCROLL TO EXPAND', imagingOverlayKicker: 'IMAGE STUDY / 03', imagingOverlayTitle: 'At the crossing, direction becomes visible.', imagingOverlayLead: 'Imaging is not decoration. It is a way for design, environment, and feeling to meet.',
     capabilities: 'CAPABILITIES', capabilityTitle: <>From insight to making,<br />every step stays clear.</>, recognition: 'RECOGNITION', recognitionText: <>Multiple Milan Design Week selections<br />G-Cross Design Competition / Bronze<br />Chuyi Cup Provincial Award</>, software: 'TOOLS',
     contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>Make the next product<br />feel closer to real life.</>, resume: 'Download résumé', collaboration: <>Open to product design collaborations with brands, teams, and independent makers.<br />Contact details are included in the updated résumé.</>,
-    overview: 'OVERVIEW', visualRecord: 'VISUAL RECORD', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: 'Back to selected work', notFound: <>This project has<br />not been archived yet.</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: 'Close project details', workShowcase: 'project showcase', visualRecordAlt: 'visual record',
+    overview: 'OVERVIEW', visualRecord: 'VISUAL RECORD', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: 'Back to product work', notFound: <>This project has<br />not been archived yet.</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: 'Close project details', workShowcase: 'project showcase', visualRecordAlt: 'visual record',
   },
 }
 
@@ -409,7 +412,7 @@ function ProjectDetail({ project, onHome, onBack, language }) {
         </button>
         <div className="detail-hero-grid">
           <div className="detail-hero-copy">
-            <p className="eyebrow"><span /> {project.number} / SELECTED WORK</p>
+            <p className="eyebrow"><span /> {project.number} / PRODUCT WORK</p>
             <h1>{localized(project, 'title', language)}</h1>
             <p className="detail-english">{language === 'en' ? project.english : project.english}</p>
             <div className="detail-meta">
@@ -616,10 +619,11 @@ function App() {
           </span>
         </button>
 
-        <nav className="nav-links">
-          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}>{text.navAbout}</button>
-          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}>{text.navProjects}</button>
-          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}>{text.navCapabilities}</button>
+      <nav className="nav-links">
+        <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}>{text.navAbout}</button>
+        <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}>{text.navProjects}</button>
+        <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('imaging')}>{text.navImaging}</button>
+        <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}>{text.navCapabilities}</button>
         </nav>
 
         <div className="header-actions">
@@ -667,7 +671,8 @@ function App() {
           <div className="mobile-menu-links">
             <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}><span>01</span>{text.navAbout}<ArrowUpRight size={17} /></button>
             <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}><span>02</span>{text.navProjects}<ArrowUpRight size={17} /></button>
-            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}><span>03</span>{text.navCapabilities}<ArrowUpRight size={17} /></button>
+            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('imaging')}><span>03</span>{text.navImaging}<ArrowUpRight size={17} /></button>
+            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}><span>04</span>{text.navCapabilities}<ArrowUpRight size={17} /></button>
           </div>
           <button className="mobile-menu-contact" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
             {text.contact} <ArrowUpRight size={17} />
@@ -790,9 +795,46 @@ function App() {
         </div>
       </section>
 
+      <section className="imaging-section section" id="imaging" aria-labelledby="imaging-title">
+        <div className="shell imaging-heading">
+          <div className="section-kicker">
+            <span>03</span>
+            <p>{text.imagingKicker}</p>
+          </div>
+          <div>
+            <h2 id="imaging-title">{text.imagingTitle}</h2>
+            <p>{text.imagingLead}</p>
+          </div>
+        </div>
+        <div className="imaging-scroll-wrap">
+          <ScrollExpand
+            className="imaging-scroll"
+            src="/assets/portfolio/imaging-forest.jpg"
+            alt={language === 'en' ? 'Aerial view of a forest road' : '森林道路的航拍影像'}
+            title={text.imagingScrollTitle}
+            scrollHint={text.imagingScrollHint}
+            startWidth={48}
+            startHeight={58}
+            startRadius={22}
+            mediaZoom={1.16}
+            scrollDistance={1.08}
+            holdDistance={0.24}
+            overlayScrim={0.34}
+            useWindowScroll
+          >
+            <div className="imaging-scroll-overlay">
+              <span className="eyebrow"><span /> {text.imagingOverlayKicker}</span>
+              <h3>{text.imagingOverlayTitle}</h3>
+              <p>{text.imagingOverlayLead}</p>
+              <span className="imaging-scroll-index">03 / 04</span>
+            </div>
+          </ScrollExpand>
+        </div>
+      </section>
+
       <section className="strength-section section shell" id="strengths" aria-labelledby="strengths-title">
         <div className="strength-head">
-          <div className="section-kicker"><span>03</span><p>{text.capabilities}</p></div>
+          <div className="section-kicker"><span>04</span><p>{text.capabilities}</p></div>
           <h2 id="strengths-title">{text.capabilityTitle}</h2>
           <div className="award-note">
             <span>{text.recognition}</span>
