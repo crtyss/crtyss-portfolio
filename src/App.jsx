@@ -19,11 +19,14 @@ const projects = [
     id: 'mouse',
     number: '01',
     title: '残障便利性鼠标',
+    titleEn: 'Accessible Mouse',
     english: 'Accessible Mouse',
     category: '无障碍产品',
+    categoryEn: 'Accessible Product',
     year: '2025',
     image: '/assets/portfolio/mouse.jpg',
     summary: '围绕手部操作便利性，探索更自然、更稳定的握持与控制体验。',
+    summaryEn: 'Exploring a more natural and stable grip and control experience for people with different hand abilities.',
     gallery: ['/assets/portfolio/galleries/mouse-01.jpg', '/assets/portfolio/galleries/mouse-02.jpg', '/assets/portfolio/galleries/mouse-03.jpg'],
     detailLayout: 'precision',
     hasDetail: true,
@@ -34,11 +37,14 @@ const projects = [
     id: 'furniture',
     number: '02',
     title: 'Cymatium 曲面共生家具',
+    titleEn: 'Cymatium Coexisting Furniture',
     english: 'Furniture System',
     category: '家具产品设计',
+    categoryEn: 'Furniture Product Design',
     year: '2025',
     image: '/assets/portfolio/furniture.jpg',
     summary: '以曲面语言组织模块、收纳与陈列，让家具成为空间中的柔性结构。',
+    summaryEn: 'Curved surfaces organize modules, storage, and display into a flexible structure for the room.',
     gallery: ['/assets/portfolio/galleries/furniture-01.jpg', '/assets/portfolio/galleries/furniture-02.jpg', '/assets/portfolio/galleries/furniture-03.jpg', '/assets/portfolio/galleries/furniture-04.jpg', '/assets/portfolio/galleries/furniture-05.jpg'],
     detailLayout: 'spatial',
     hasDetail: true,
@@ -49,11 +55,14 @@ const projects = [
     id: 'air',
     number: '03',
     title: 'O2 家居空气净化器',
+    titleEn: 'O2 Home Air Purifier',
     english: 'O2 Air Purifier',
     category: '生活电器',
+    categoryEn: 'Home Appliance',
     year: '2024',
     image: '/assets/portfolio/air.jpg',
     summary: '以静谧家居氛围为出发点，平衡净化功能、交互信息与空间质感。',
+    summaryEn: 'Balancing purification, interaction, and spatial calm to make healthy air feel at home.',
     gallery: ['/assets/portfolio/galleries/air-01.jpg', '/assets/portfolio/galleries/air-02.jpg', '/assets/portfolio/galleries/air-03.jpg', '/assets/portfolio/galleries/air-04.jpg', '/assets/portfolio/galleries/air-05.jpg'],
     detailLayout: 'ambient',
     hasDetail: true,
@@ -64,11 +73,14 @@ const projects = [
     id: 'micro',
     number: '04',
     title: 'Seeker 便携显微镜',
+    titleEn: 'Seeker Portable Microscope',
     english: 'Children Microscope',
     category: '儿童益智产品',
+    categoryEn: 'Children’s Learning Product',
     year: '2024',
     image: '/assets/portfolio/micro.jpg',
     summary: '通过易握持的结构和柔和的视觉提示，降低儿童探索微观世界的门槛。',
+    summaryEn: 'An easy-to-hold form and gentle visual cues invite children into the microscopic world.',
     gallery: ['/assets/portfolio/galleries/micro-01.jpg', '/assets/portfolio/galleries/micro-02.jpg', '/assets/portfolio/galleries/micro-03.jpg', '/assets/portfolio/galleries/micro-04.jpg', '/assets/portfolio/galleries/micro-05.jpg'],
     detailLayout: 'discovery',
     hasDetail: true,
@@ -79,11 +91,14 @@ const projects = [
     id: 'breath',
     number: '05',
     title: '儿童友好型呼吸器',
+    titleEn: 'Child-friendly Breathing Companion',
     english: 'Breathing Companion',
     category: '医疗辅助产品',
+    categoryEn: 'Medical Support Product',
     year: '2024',
     image: '/assets/portfolio/breath.jpg',
     summary: '用柔和的造型和清晰的反馈，降低儿童面对呼吸辅助设备时的紧张感。',
+    summaryEn: 'A soft form and clear feedback reduce anxiety around respiratory support for children.',
     gallery: ['/assets/portfolio/breath.jpg', '/assets/portfolio/galleries/breath-02.jpg', '/assets/portfolio/galleries/breath-03.jpg'],
     detailLayout: 'support',
     hasDetail: true,
@@ -94,11 +109,14 @@ const projects = [
     id: 'rope',
     number: '06',
     title: '儿童智能跳绳',
+    titleEn: 'Smart Jump Rope',
     english: 'Smart Jump Rope',
     category: '运动与成长',
+    categoryEn: 'Movement & Growth',
     year: '2024',
     image: '/assets/portfolio/rope.jpg',
     summary: '将运动数据融入轻松的游戏反馈，让持续练习变得自然、可见。',
+    summaryEn: 'Lightweight game feedback turns movement data into a visible, natural rhythm of practice.',
     gallery: ['/assets/portfolio/rope.jpg', '/assets/portfolio/galleries/rope-02.jpg', '/assets/portfolio/galleries/rope-03.jpg', '/assets/portfolio/galleries/rope-04.jpg'],
     detailLayout: 'growth',
     hasDetail: true,
@@ -109,11 +127,14 @@ const projects = [
     id: 'toothbrush',
     number: '07',
     title: '壁挂式电动牙刷',
+    titleEn: 'Wall-mounted Electric Toothbrush',
     english: 'Wall-mounted Electric Toothbrush',
     category: '个人护理',
+    categoryEn: 'Personal Care',
     year: '2024',
     image: '/assets/portfolio/toothbrush.jpg',
     summary: '重新整理收纳、充电与握持关系，让个人护理设备更安静地融入浴室。',
+    summaryEn: 'Reframing storage, charging, and grip lets personal care settle quietly into the bathroom.',
     gallery: ['/assets/portfolio/toothbrush.jpg', '/assets/portfolio/galleries/toothbrush-02.jpg', '/assets/portfolio/galleries/toothbrush-03.jpg', '/assets/portfolio/galleries/toothbrush-04.jpg', '/assets/portfolio/galleries/toothbrush-05.jpg'],
     detailLayout: 'care',
     hasDetail: true,
@@ -124,11 +145,14 @@ const projects = [
     id: 'medicine',
     number: '08',
     title: '老年人药盒',
+    titleEn: 'Medication Organizer',
     english: 'Medication Organizer',
     category: '适老化产品',
+    categoryEn: 'Age-friendly Product',
     year: '2024',
     image: '/assets/portfolio/medicine.jpg',
     summary: '以更明确的时间提示和更易读的结构，帮助长辈建立稳定的用药习惯。',
+    summaryEn: 'Clear time cues and an easy-to-read structure support a steady medication routine for older adults.',
     gallery: ['/assets/portfolio/medicine.jpg', '/assets/portfolio/galleries/medicine-02.jpg', '/assets/portfolio/galleries/medicine-03.jpg', '/assets/portfolio/galleries/medicine-04.jpg', '/assets/portfolio/galleries/medicine-05.jpg'],
     detailLayout: 'medical',
     hasDetail: true,
@@ -139,11 +163,14 @@ const projects = [
     id: 'culture',
     number: '09',
     title: '青原印象',
+    titleEn: 'Qingyuan Impressions',
     english: 'Cultural Product Design',
     category: '文创产品设计',
+    categoryEn: 'Cultural Product Design',
     year: '2025',
     image: '/assets/portfolio/culture.jpg',
     summary: '从地域文化中提炼形、色与器物关系，建立一套安静而现代的产品叙事。',
+    summaryEn: 'Shape, color, and object relationships from local culture become a quiet, contemporary product story.',
     gallery: ['/assets/portfolio/culture.jpg', '/assets/portfolio/galleries/culture-02.jpg', '/assets/portfolio/galleries/culture-03.jpg', '/assets/portfolio/galleries/culture-04.jpg', '/assets/portfolio/galleries/culture-05.jpg'],
     detailLayout: 'cultural',
     hasDetail: true,
@@ -154,11 +181,14 @@ const projects = [
     id: 'gater',
     number: '10',
     title: 'Gater 咖啡机',
+    titleEn: 'Gater Coffee Machine',
     english: 'Gater Coffee Machine',
     category: '生活电器',
+    categoryEn: 'Home Appliance',
     year: '2025',
     image: '/assets/portfolio/gater.jpg',
     summary: '以仪式感与高效操作为核心，建立从冲煮到清洁的完整产品体验。',
+    summaryEn: 'A complete coffee ritual, from brewing to cleaning, built around clarity and efficient operation.',
     gallery: ['/assets/portfolio/galleries/gater-01.jpg', '/assets/portfolio/galleries/gater-02.jpg', '/assets/portfolio/galleries/gater-03.jpg', '/assets/portfolio/galleries/gater-04.jpg', '/assets/portfolio/galleries/gater-05.jpg'],
     detailLayout: 'machine',
     hasDetail: true,
@@ -167,30 +197,71 @@ const projects = [
   },
 ]
 
+const localized = (item, key, language) => language === 'en' && item[`${key}En`] ? item[`${key}En`] : item[key]
+
+const copy = {
+  zh: {
+    navAbout: '关于我', navProjects: '精选作品', navCapabilities: '能力', contact: '联系我', menu: '菜单', close: '关闭',
+    navigation: 'NAVIGATION / 导航', home: '返回首页', selectedWork: '精选作品', viewProject: '查看项目',
+    heroEyebrow: 'PRODUCT DESIGN PORTFOLIO / 2024 - 2025', heroLine1: '为日常，', heroLine2: '设计更好的感受。',
+    heroDescription: <>Crtyss 是一名关注人与物关系的产品设计师，<br />以克制的形态，回应真实的使用。</>, seeAbout: '查看个人经历', selectedProjects: 'SELECTED<br />PROJECTS', productDesigner: 'PRODUCT<br />DESIGNER',
+    aboutKicker: 'ABOUT / 关于', aboutTitle: <>为真实生活<br />留下恰好的设计。</>, aboutLead: '从产品形态到使用体验，持续探索设计如何更轻、更准地参与日常。', selfPortrait: 'Crtyss 二次元自画像', profile: 'PROFILE', profileText: '就读于湖南涉外经济学院艺术设计专业。系统学习产品设计理论与实践，重视从具体需求出发完成从概念、建模到呈现和验证的完整表达。', education: 'EDUCATION', school: '湖南涉外经济学院 / 艺术设计', location: 'LOCATION', locationValue: '湖南张家界', locationNote: '开放合作与交流',
+    facts: ['设计赛事奖项与作品入选', '学校专项奖学金', '年视觉中国 500px 签约供稿', '覆盖产品、家具、文创等方向'],
+    projectKicker: 'SELECTED WORK / 精选作品', projectTitle: <>让形态服务于<br />更好的体验。</>, projectLead: '从产品概念到视觉呈现，精选十个关注人、空间与文化体验的设计片段。',
+    capabilities: 'CAPABILITIES / 能力', capabilityTitle: <>从洞察到落地，<br />保持每一步的清晰。</>, recognition: 'RECOGNITION', recognitionText: <>米兰设计周多项获奖<br />G-Cross 设计大赛铜奖<br />楚怡杯省级奖项</>, software: '掌握的软件',
+    contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>让下一件产品，<br />更贴近真实的生活。</>, resume: '获取完整简历', collaboration: <>期待与品牌、团队和创作者展开产品设计合作。<br />联系方式可在更新后的简历中补充。</>,
+    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回精选作品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录',
+  },
+  en: {
+    navAbout: 'About', navProjects: 'Selected Work', navCapabilities: 'Capabilities', contact: 'Contact', menu: 'Menu', close: 'Close',
+    navigation: 'NAVIGATION', home: 'Home', selectedWork: 'Selected Work', viewProject: 'View project',
+    heroEyebrow: 'PRODUCT DESIGN PORTFOLIO / 2024 - 2025', heroLine1: 'Better objects,', heroLine2: 'for everyday feeling.',
+    heroDescription: <>Crtyss is a product designer interested in the relationship<br />between people and the things they use.</>, seeAbout: 'View profile', selectedProjects: 'SELECTED<br />PROJECTS', productDesigner: 'PRODUCT<br />DESIGNER',
+    aboutKicker: 'ABOUT', aboutTitle: <>Design that stays<br />close to real life.</>, aboutLead: 'From product form to the moments of use, I explore how design can participate in everyday life with more clarity and care.', selfPortrait: 'Crtyss self portrait', profile: 'PROFILE', profileText: 'Product design student at Hunan International Economics University. I work from concrete needs toward a complete expression, from concept and modeling to presentation and validation.', education: 'EDUCATION', school: 'Hunan International Economics University / Product Design', location: 'LOCATION', locationValue: 'Zhangjiajie, Hunan', locationNote: 'Open to collaboration',
+    facts: ['design awards & selections', 'school scholarships', 'years as a Visual China / 500px contributor', 'product, furniture & cultural directions'],
+    projectKicker: 'SELECTED WORK', projectTitle: <>Form in service of<br />a better experience.</>, projectLead: 'Ten studies across products, spaces, and cultural experiences, moving from concept to a considered visual language.',
+    capabilities: 'CAPABILITIES', capabilityTitle: <>From insight to making,<br />every step stays clear.</>, recognition: 'RECOGNITION', recognitionText: <>Multiple Milan Design Week selections<br />G-Cross Design Competition / Bronze<br />Chuyi Cup Provincial Award</>, software: 'TOOLS',
+    contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>Make the next product<br />feel closer to real life.</>, resume: 'Download résumé', collaboration: <>Open to product design collaborations with brands, teams, and independent makers.<br />Contact details are included in the updated résumé.</>,
+    overview: 'OVERVIEW', visualRecord: 'VISUAL RECORD', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: 'Back to selected work', notFound: <>This project has<br />not been archived yet.</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: 'Close project details', workShowcase: 'project showcase', visualRecordAlt: 'visual record',
+  },
+}
+
 const strengths = [
   {
     index: '01',
     title: '概念建构',
+    titleEn: 'Concept Building',
     description: '从用户与使用场景出发，把模糊需求转译为清晰的产品命题。',
+    descriptionEn: 'Starting with people and context, I translate ambiguous needs into clear product questions.',
     tools: ['用户洞察', '产品定义'],
+    toolsEn: ['User insight', 'Product definition'],
   },
   {
     index: '02',
     title: '三维造型',
+    titleEn: 'Form Development',
     description: '以比例、曲面和结构推敲产品形态，兼顾视觉张力与可制造性。',
+    descriptionEn: 'I develop proportions, surfaces, and structure with equal attention to character and making.',
     tools: ['Rhino', '3ds Max'],
+    toolsEn: ['Rhino', '3ds Max'],
   },
   {
     index: '03',
     title: '视觉叙事',
+    titleEn: 'Visual Narrative',
     description: '通过材质、光线与场景表达，让设计在被说明之前先被感知。',
+    descriptionEn: 'Material, light, and atmosphere let a design be felt before it needs to be explained.',
     tools: ['KeyShot', 'Blender'],
+    toolsEn: ['KeyShot', 'Blender'],
   },
   {
     index: '04',
     title: '实体验证',
+    titleEn: 'Physical Validation',
     description: '使用 FDM 3D 打印快速验证尺寸、握持与零部件之间的关系。',
+    descriptionEn: 'FDM prototypes quickly test dimensions, grip, and the relationship between components.',
     tools: ['Bambu Studio', 'FDM 3D'],
+    toolsEn: ['Bambu Studio', 'FDM 3D printing'],
   },
 ]
 
@@ -312,15 +383,16 @@ function PointerEffects() {
   )
 }
 
-function ProjectDetail({ project, onHome, onBack }) {
+function ProjectDetail({ project, onHome, onBack, language }) {
+  const text = copy[language]
   if (!project) {
     return (
       <section className="project-detail project-not-found">
         <div className="shell detail-not-found-inner">
-          <p className="eyebrow"><span /> 404 / PROJECT NOT FOUND</p>
-          <h1>这个项目暂时<br />还没有被收录。</h1>
+          <p className="eyebrow"><span /> {text.projectNotFound}</p>
+          <h1>{text.notFound}</h1>
           <button className="detail-back detail-back-light" data-cursor-interactive data-cursor-magnetic onClick={onHome}>
-            <ArrowLeft size={17} /> 返回精选作品
+            <ArrowLeft size={17} /> {text.returnWorks}
           </button>
         </div>
       </section>
@@ -331,39 +403,39 @@ function ProjectDetail({ project, onHome, onBack }) {
     <section className={`project-detail detail-layout-${project.detailLayout || 'precision'}`}>
       <div className="detail-hero shell">
         <button className="detail-back" data-cursor-interactive data-cursor-magnetic onClick={onBack}>
-          <ArrowLeft size={17} /> 返回精选作品
+          <ArrowLeft size={17} /> {text.returnWorks}
         </button>
         <div className="detail-hero-grid">
           <div className="detail-hero-copy">
             <p className="eyebrow"><span /> {project.number} / SELECTED WORK</p>
-            <h1>{project.title}</h1>
-            <p className="detail-english">{project.english}</p>
+            <h1>{localized(project, 'title', language)}</h1>
+            <p className="detail-english">{language === 'en' ? project.english : project.english}</p>
             <div className="detail-meta">
-              <div><small>CATEGORY</small><b>{project.category}</b></div>
-              <div><small>YEAR</small><b>{project.year}</b></div>
+              <div><small>{text.category}</small><b>{localized(project, 'category', language)}</b></div>
+              <div><small>{text.year}</small><b>{project.year}</b></div>
             </div>
           </div>
           <figure className="detail-cover">
-            <img src={project.image} alt={`${project.title} 主视觉`} />
-            <figcaption><span>CRTYSS / OBJECT STUDY</span><span>{project.number} / {project.year}</span></figcaption>
+            <img src={project.image} alt={`${localized(project, 'title', language)} ${language === 'en' ? 'hero image' : '主视觉'}`} />
+            <figcaption><span>{text.objectStudy}</span><span>{project.number} / {project.year}</span></figcaption>
           </figure>
         </div>
       </div>
 
       <div className="detail-body shell">
         <div className="detail-intro">
-          <div className="section-kicker"><span>01</span><p>OVERVIEW / 项目概览</p></div>
-          <p>{project.summary}</p>
+          <div className="section-kicker"><span>01</span><p>{text.overview}</p></div>
+          <p>{localized(project, 'summary', language)}</p>
         </div>
 
         <div className="detail-gallery-heading">
-          <div className="section-kicker"><span>02</span><p>VISUAL RECORD / 视觉记录</p></div>
-          <span>{project.gallery?.length || 0} IMAGES</span>
+          <div className="section-kicker"><span>02</span><p>{text.visualRecord}</p></div>
+          <span>{project.gallery?.length || 0} {text.images}</span>
         </div>
         <div className="detail-gallery">
           {(project.gallery || []).map((image, index) => (
             <figure className="detail-gallery-item" key={image}>
-              <img src={image} alt={`${project.title} 视觉记录 ${index + 1}`} loading="lazy" />
+              <img src={image} alt={`${localized(project, 'title', language)} ${text.visualRecordAlt} ${index + 1}`} loading="lazy" />
               <figcaption><span>VISUAL RECORD</span><span>{String(index + 1).padStart(2, '0')}</span></figcaption>
             </figure>
           ))}
@@ -371,8 +443,8 @@ function ProjectDetail({ project, onHome, onBack }) {
       </div>
 
       <div className="detail-end shell">
-        <p className="eyebrow"><span /> END OF PROJECT</p>
-        <button className="detail-next" data-cursor-interactive data-cursor-magnetic onClick={onHome}>返回精选作品 <ArrowUpRight size={17} /></button>
+        <p className="eyebrow"><span /> {text.endProject}</p>
+        <button className="detail-next" data-cursor-interactive data-cursor-magnetic onClick={onHome}>{text.returnWorks} <ArrowUpRight size={17} /></button>
       </div>
     </section>
   )
@@ -382,7 +454,15 @@ function App() {
   const [activeProject, setActiveProject] = useState(null)
   const [route, setRoute] = useState(readRoute)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [language, setLanguage] = useState(() => window.localStorage.getItem('crtyss-language') || 'zh')
   const mainRef = useRef(null)
+  const text = copy[language]
+
+  useEffect(() => {
+    window.localStorage.setItem('crtyss-language', language)
+    document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN'
+    document.title = language === 'en' ? 'Crtyss - Product Designer' : 'Crtyss - 产品设计师'
+  }, [language])
 
   const goTo = (path, { scrollTo } = {}) => {
     window.history.pushState({}, '', path)
@@ -398,6 +478,8 @@ function App() {
     if (route.type === 'home') scrollToId(id)
     else goHome(id)
   }
+
+  const toggleLanguage = () => setLanguage((current) => current === 'zh' ? 'en' : 'zh')
 
   const openProject = (project) => {
     if (project.hasDetail) goTo(`/works/${project.id}`)
@@ -516,8 +598,8 @@ function App() {
   return (
     <main ref={mainRef}>
       <PointerEffects />
-      <header className={`site-header ${route.type === 'detail' ? 'site-header-light' : ''}`} aria-label="主导航">
-        <button className="brand" data-cursor-interactive data-cursor-magnetic onClick={() => goHome()} aria-label="返回首页">
+      <header className={`site-header ${route.type === 'detail' ? 'site-header-light' : ''}`} aria-label={language === 'en' ? 'Main navigation' : '主导航'}>
+        <button className="brand" data-cursor-interactive data-cursor-magnetic onClick={() => goHome()} aria-label={text.home}>
           <img className="brand-mark" src="/assets/portfolio/profile-crtyss.jpg" alt="" />
           <span>
             <b>Crtyss</b>
@@ -526,47 +608,53 @@ function App() {
         </button>
 
         <nav className="nav-links">
-          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}>关于我</button>
-          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}>精选作品</button>
-          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}>能力</button>
+          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}>{text.navAbout}</button>
+          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}>{text.navProjects}</button>
+          <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}>{text.navCapabilities}</button>
         </nav>
 
-        <button className="contact-button" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
-          联系我 <ArrowUpRight size={16} strokeWidth={2.25} />
-        </button>
+        <div className="header-actions">
+          <button className="language-toggle" data-cursor-interactive data-cursor-magnetic onClick={toggleLanguage} aria-label={language === 'en' ? 'Switch to Chinese' : 'Switch to English'}>
+            <span className={language === 'zh' ? 'is-active' : ''}>中</span><i>/</i><span className={language === 'en' ? 'is-active' : ''}>EN</span>
+          </button>
+          <button className="contact-button" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
+            {text.contact} <ArrowUpRight size={16} strokeWidth={2.25} />
+          </button>
+        </div>
         <button
           className="mobile-menu-toggle"
           data-cursor-interactive
           onClick={() => setMobileMenuOpen((open) => !open)}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-navigation"
-          aria-label={mobileMenuOpen ? '关闭导航菜单' : '打开导航菜单'}
+          aria-label={mobileMenuOpen ? text.close : text.menu}
         >
           {mobileMenuOpen ? <X size={19} /> : <Menu size={19} />}
-          <span>{mobileMenuOpen ? '关闭' : '菜单'}</span>
+          <span>{mobileMenuOpen ? text.close : text.menu}</span>
         </button>
       </header>
 
       <div className={`mobile-menu ${mobileMenuOpen ? 'is-open' : ''}`} id="mobile-navigation" aria-hidden={!mobileMenuOpen}>
         <div className="mobile-menu-inner">
-          <p className="mobile-menu-kicker">NAVIGATION / 导航</p>
+          <p className="mobile-menu-kicker">{text.navigation}</p>
           <div className="mobile-menu-links">
-            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}><span>01</span>关于我<ArrowUpRight size={17} /></button>
-            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}><span>02</span>精选作品<ArrowUpRight size={17} /></button>
-            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}><span>03</span>能力<ArrowUpRight size={17} /></button>
+            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('about')}><span>01</span>{text.navAbout}<ArrowUpRight size={17} /></button>
+            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('projects')}><span>02</span>{text.navProjects}<ArrowUpRight size={17} /></button>
+            <button data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('strengths')}><span>03</span>{text.navCapabilities}<ArrowUpRight size={17} /></button>
           </div>
           <button className="mobile-menu-contact" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
-            联系我 <ArrowUpRight size={17} />
+            {text.contact} <ArrowUpRight size={17} />
           </button>
         </div>
       </div>
-      {mobileMenuOpen && <button className="mobile-menu-scrim" onClick={() => setMobileMenuOpen(false)} aria-label="关闭导航菜单" />}
+      {mobileMenuOpen && <button className="mobile-menu-scrim" onClick={() => setMobileMenuOpen(false)} aria-label={text.close} />}
 
       {route.type === 'detail' ? (
         <ProjectDetail
           project={projects.find((project) => project.id === route.projectId)}
           onHome={() => goHome('projects')}
           onBack={() => goHome('projects')}
+          language={language}
         />
       ) : <>
       <section className="hero" id="home" aria-labelledby="hero-title">
@@ -590,50 +678,50 @@ function App() {
         <div className="hero-veil" />
         <div className="hero-opening-curtain" aria-hidden="true" />
         <div className="hero-content shell">
-          <p className="eyebrow hero-eyebrow"><span /> PRODUCT DESIGN PORTFOLIO / 2024 - 2025</p>
+          <p className="eyebrow hero-eyebrow"><span /> {text.heroEyebrow}</p>
           <h1 id="hero-title" className="hero-title">
-            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text="为日常，" speed={4.5} delay={1.2} spread={105} /></span></span>
-            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text="设计更好的感受。" speed={4.5} delay={1.2} spread={105} /></span></span>
+            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine1} speed={4.5} delay={1.2} spread={105} /></span></span>
+            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine2} speed={4.5} delay={1.2} spread={105} /></span></span>
           </h1>
           <div className="hero-bottom">
-          <p>Crtyss 是一名关注人与物关系的产品设计师，<br />以克制的形态，回应真实的使用。</p>
-            <button className="round-arrow" data-cursor-interactive data-cursor-magnetic onClick={() => scrollToId('about')} aria-label="查看个人经历" title="查看个人经历">
+          <p>{text.heroDescription}</p>
+            <button className="round-arrow" data-cursor-interactive data-cursor-magnetic onClick={() => scrollToId('about')} aria-label={text.seeAbout} title={text.seeAbout}>
               <ArrowDown size={21} />
             </button>
           </div>
         </div>
-        <div className="hero-metric hero-metric-left"><span>10</span><small>SELECTED<br />PROJECTS</small></div>
-        <div className="hero-metric hero-metric-right"><span>2025</span><small>PRODUCT<br />DESIGNER</small></div>
+        <div className="hero-metric hero-metric-left"><span>10</span><small dangerouslySetInnerHTML={{ __html: text.selectedProjects }} /></div>
+        <div className="hero-metric hero-metric-right"><span>2025</span><small dangerouslySetInnerHTML={{ __html: text.productDesigner }} /></div>
       </section>
 
       <section className="about section shell" id="about" aria-labelledby="about-title">
         <div className="section-kicker">
           <span>01</span>
-          <p>ABOUT / 关于</p>
+          <p>{text.aboutKicker}</p>
         </div>
         <div className="about-grid">
           <div className="about-title-block">
-            <h2 id="about-title">为真实生活<br />留下恰好的设计。</h2>
-            <p className="lead">从产品形态到使用体验，持续探索设计如何更轻、更准地参与日常。</p>
+            <h2 id="about-title">{text.aboutTitle}</h2>
+            <p className="lead">{text.aboutLead}</p>
           </div>
           <div className="portrait-card profile-visual">
-            <img src="/assets/portfolio/profile-crtyss.jpg" alt="Crtyss 二次元自画像" />
+            <img src="/assets/portfolio/profile-crtyss.jpg" alt={text.selfPortrait} />
             <div className="portrait-caption"><span>CRTYSS / SELF PORTRAIT</span><span>PROFILE / 01</span></div>
           </div>
           <div className="bio-card glass-light">
             <span className="card-label">PROFILE</span>
-            <p>就读于湖南涉外经济学院艺术设计专业。系统学习产品设计理论与实践，重视从具体需求出发完成从概念、建模到呈现和验证的完整表达。</p>
+            <p>{text.profileText}</p>
             <div className="bio-meta">
-              <div><small>EDUCATION</small><b>2023.09 - 2026.06</b><span>湖南涉外经济学院 / 艺术设计</span></div>
-              <div><small>LOCATION</small><b>湖南张家界</b><span>开放合作与交流</span></div>
+              <div><small>{text.education}</small><b>2023.09 - 2026.06</b><span>{text.school}</span></div>
+              <div><small>{text.location}</small><b>{text.locationValue}</b><span>{text.locationNote}</span></div>
             </div>
           </div>
         </div>
         <div className="facts-grid">
-          <article><strong>08<span>+</span></strong><p>设计赛事奖项与作品入选</p></article>
-          <article><strong>02</strong><p>学校专项奖学金</p></article>
-          <article><strong>03</strong><p>年视觉中国 500px 签约供稿</p></article>
-          <article><strong>05</strong><p>覆盖产品、家具、文创等方向</p></article>
+          <article><strong>08<span>+</span></strong><p>{text.facts[0]}</p></article>
+          <article><strong>02</strong><p>{text.facts[1]}</p></article>
+          <article><strong>03</strong><p>{text.facts[2]}</p></article>
+          <article><strong>05</strong><p>{text.facts[3]}</p></article>
         </div>
       </section>
 
@@ -641,11 +729,11 @@ function App() {
         <div className="shell project-heading">
           <div className="section-kicker">
             <span>02</span>
-            <p>SELECTED WORK / 精选作品</p>
+            <p>{text.projectKicker}</p>
           </div>
           <div>
-            <h2 id="projects-title">让形态服务于<br />更好的体验。</h2>
-            <p>从产品概念到视觉呈现，精选十个关注人、空间与文化体验的设计片段。</p>
+            <h2 id="projects-title">{text.projectTitle}</h2>
+            <p>{text.projectLead}</p>
           </div>
         </div>
 
@@ -658,8 +746,8 @@ function App() {
               tabIndex="0"
               role="button"
               onClick={() => openProject(project)}
-              onKeyDown={(event) => event.key === 'Enter' && setActiveProject(project)}
-              aria-label={`查看项目：${project.title}`}
+              onKeyDown={(event) => event.key === 'Enter' && openProject(project)}
+              aria-label={`${text.viewProject}: ${localized(project, 'title', language)}`}
             >
               <img src={project.image} alt="" />
               <div className="project-shade" />
@@ -667,8 +755,8 @@ function App() {
                 <span>{project.number}</span><span>{project.year}</span>
               </div>
               <div className="project-card-bottom">
-                <div><small>{project.category}</small><h3>{project.title}</h3><p>{project.english}</p></div>
-                <span className="project-open" title="查看项目"><ArrowUpRight size={21} /></span>
+                <div><small>{localized(project, 'category', language)}</small><h3>{localized(project, 'title', language)}</h3><p>{project.english}</p></div>
+                <span className="project-open" title={text.viewProject}><ArrowUpRight size={21} /></span>
               </div>
             </article>
           ))}
@@ -677,25 +765,25 @@ function App() {
 
       <section className="strength-section section shell" id="strengths" aria-labelledby="strengths-title">
         <div className="strength-head">
-          <div className="section-kicker"><span>03</span><p>CAPABILITIES / 能力</p></div>
-          <h2 id="strengths-title">从洞察到落地，<br />保持每一步的清晰。</h2>
+          <div className="section-kicker"><span>03</span><p>{text.capabilities}</p></div>
+          <h2 id="strengths-title">{text.capabilityTitle}</h2>
           <div className="award-note">
-            <span>RECOGNITION</span>
-            <p>米兰设计周多项获奖<br />G-Cross 设计大赛铜奖<br />楚怡杯省级奖项</p>
+            <span>{text.recognition}</span>
+            <p>{text.recognitionText}</p>
           </div>
         </div>
         <div className="strength-grid">
           {strengths.map((strength) => (
             <article className="strength-card glass-light" key={strength.index}>
               <span className="card-index">{strength.index}</span>
-              <h3>{strength.title}</h3>
-              <p>{strength.description}</p>
-              <div className="tool-list">{strength.tools.map((tool) => <span key={tool}>{tool}</span>)}</div>
+              <h3>{language === 'en' ? strength.titleEn : strength.title}</h3>
+              <p>{language === 'en' ? strength.descriptionEn : strength.description}</p>
+              <div className="tool-list">{(language === 'en' ? strength.toolsEn : strength.tools).map((tool) => <span key={tool}>{tool}</span>)}</div>
               <Plus className="card-plus" size={18} />
             </article>
           ))}
         </div>
-        <div className="software-strip" aria-label="掌握的软件">
+        <div className="software-strip" aria-label={text.software}>
           <span>RHINO</span><i /> <span>KEYSHOT</span><i /> <span>BLENDER</span><i /> <span>PHOTOSHOP</span><i /> <span>BAMBU STUDIO</span>
         </div>
       </section>
@@ -708,13 +796,13 @@ function App() {
         </div>
         <div className="contact-veil" />
         <div className="contact-inner shell">
-          <p className="eyebrow"><span /> LET'S CREATE SOMETHING MEANINGFUL</p>
-          <h2 id="contact-title">让下一件产品，<br />更贴近真实的生活。</h2>
+          <p className="eyebrow"><span /> {text.contactEyebrow}</p>
+          <h2 id="contact-title">{text.contactTitle}</h2>
           <div className="contact-actions">
             <a className="resume-link" data-cursor-interactive data-cursor-magnetic href="/assets/Crtyss-Resume.docx" download>
-              获取完整简历 <Download size={18} />
+              {text.resume} <Download size={18} />
             </a>
-            <p>期待与品牌、团队和创作者展开产品设计合作。<br />联系方式可在更新后的简历中补充。</p>
+            <p>{text.collaboration}</p>
           </div>
           <footer><span>CRTYSS / PRODUCT DESIGNER</span><span>© 2025</span></footer>
         </div>
@@ -724,12 +812,12 @@ function App() {
       {activeProject && (
         <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setActiveProject(null)}>
           <article className="project-modal glass-light" onMouseDown={(event) => event.stopPropagation()}>
-            <button className="modal-close" data-cursor-interactive data-cursor-magnetic onClick={() => setActiveProject(null)} aria-label="关闭项目详情" title="关闭"><X size={20} /></button>
-            <img src={activeProject.image} alt={`${activeProject.title} 作品展示`} />
+            <button className="modal-close" data-cursor-interactive data-cursor-magnetic onClick={() => setActiveProject(null)} aria-label={text.closeProject} title={text.close}><X size={20} /></button>
+            <img src={activeProject.image} alt={`${localized(activeProject, 'title', language)} ${text.workShowcase}`} />
             <div className="modal-copy">
-              <p className="eyebrow"><span /> {activeProject.number} / {activeProject.category}</p>
-              <h2 id="project-modal-title">{activeProject.title}</h2>
-              <p>{activeProject.summary}</p>
+              <p className="eyebrow"><span /> {activeProject.number} / {localized(activeProject, 'category', language)}</p>
+              <h2 id="project-modal-title">{localized(activeProject, 'title', language)}</h2>
+              <p>{localized(activeProject, 'summary', language)}</p>
               <span>{activeProject.year} &nbsp;·&nbsp; {activeProject.english}</span>
             </div>
           </article>
