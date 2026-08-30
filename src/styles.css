@@ -156,7 +156,9 @@ html.has-pointer-effects body, html.has-pointer-effects body * { cursor: none; }
 .project-heading h2 { max-width: 620px; }
 .project-heading > div:last-child > p { max-width: 400px; margin: 25px 0 0; color: #aaaab0; font-size: 15px; line-height: 1.75; }
 .project-grid { margin-top: 70px; display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 310px; gap: 18px; }
-.project-card { position: relative; overflow: hidden; isolation: isolate; cursor: pointer; border-radius: 5px; outline: none; }
+.project-card { position: relative; overflow: hidden; isolation: isolate; cursor: pointer; border: 1px solid rgba(255,255,255,.28); border-radius: 8px; outline: none; box-shadow: 0 18px 38px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.34), inset 0 0 0 1px rgba(255,255,255,.08); transition: border-color .45s ease, box-shadow .45s ease; }
+.project-card::before { content: ''; position: absolute; z-index: 3; inset: 3px; border: 1px solid rgba(255,255,255,.13); border-radius: 5px; pointer-events: none; }
+.project-card:hover, .project-card:focus-visible { border-color: rgba(255,255,255,.52); box-shadow: 0 26px 58px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.48), inset 0 0 0 1px rgba(255,255,255,.12); }
 .project-card img { --image-parallax: 0%; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: translate3d(0, var(--image-parallax), 0) scale(1); transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease; }
 .project-card:hover img, .project-card:focus img { transform: translate3d(0, var(--image-parallax), 0) scale(1.055); }
 .project-featured { grid-column: span 7; grid-row: span 2; }
