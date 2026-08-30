@@ -7,7 +7,9 @@ import {
   ArrowUpRight,
   Download,
   Menu,
+  Moon,
   Plus,
+  Sun,
   X,
 } from 'lucide-react'
 import ShinyText from './ShinyText'
@@ -455,6 +457,7 @@ function App() {
   const [route, setRoute] = useState(readRoute)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [language, setLanguage] = useState(() => window.localStorage.getItem('crtyss-language') || 'zh')
+  const [theme, setTheme] = useState(() => window.localStorage.getItem('crtyss-theme') || 'dark')
   const mainRef = useRef(null)
   const text = copy[language]
 
@@ -463,6 +466,11 @@ function App() {
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN'
     document.title = language === 'en' ? 'Crtyss - Product Designer' : 'Crtyss - 产品设计师'
   }, [language])
+
+  useEffect(() => {
+    window.localStorage.setItem('crtyss-theme', theme)
+    document.documentElement.dataset.theme = theme
+  }, [theme])
 
   const goTo = (path, { scrollTo } = {}) => {
     window.history.pushState({}, '', path)
@@ -480,6 +488,7 @@ function App() {
   }
 
   const toggleLanguage = () => setLanguage((current) => current === 'zh' ? 'en' : 'zh')
+  const toggleTheme = () => setTheme((current) => current === 'dark' ? 'light' : 'dark')
 
   const openProject = (project) => {
     if (project.hasDetail) goTo(`/works/${project.id}`)
@@ -598,7 +607,7 @@ function App() {
   return (
     <main ref={mainRef}>
       <PointerEffects />
-      <header className={`site-header ${route.type === 'detail' ? 'site-header-light' : ''}`} aria-label={language === 'en' ? 'Main navigation' : '主导航'}>
+      <header className={`site-header ${route.type === 'detail' || theme === 'light' ? 'site-header-light' : ''}`} aria-label={language === 'en' ? 'Main navigation' : '主导航'}>
         <button className="brand" data-cursor-interactive data-cursor-magnetic onClick={() => goHome()} aria-label={text.home}>
           <img className="brand-mark" src="/assets/portfolio/profile-crtyss.jpg" alt="" />
           <span>
@@ -616,6 +625,21 @@ function App() {
         <div className="header-actions">
           <button className="language-toggle" data-cursor-interactive data-cursor-magnetic onClick={toggleLanguage} aria-label={language === 'en' ? 'Switch to Chinese' : 'Switch to English'}>
             <span className={language === 'zh' ? 'is-active' : ''}>中</span><i>/</i><span className={language === 'en' ? 'is-active' : ''}>EN</span>
+          </button>
+          <button
+            className="theme-toggle"
+            data-cursor-interactive
+            data-cursor-magnetic
+            onClick={toggleTheme}
+            aria-pressed={theme === 'light'}
+            aria-label={theme === 'dark'
+              ? (language === 'en' ? 'Switch to light mode' : '切换到浅色模式')
+              : (language === 'en' ? 'Switch to dark mode' : '切换到深色模式')}
+          >
+            <span className={`theme-toggle-thumb ${theme === 'light' ? 'is-light' : ''}`} aria-hidden="true">
+              {theme === 'dark' ? <Moon size={12} /> : <Sun size={12} />}
+            </span>
+            <span className="theme-toggle-label">{theme === 'dark' ? 'DARK' : 'LIGHT'}</span>
           </button>
           <button className="contact-button" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
             {text.contact} <ArrowUpRight size={16} strokeWidth={2.25} />
@@ -680,8 +704,8 @@ function App() {
         <div className="hero-content shell">
           <p className="eyebrow hero-eyebrow"><span /> {text.heroEyebrow}</p>
           <h1 id="hero-title" className={`hero-title ${language === 'en' ? 'hero-title-en' : ''}`}>
-            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine1} speed={4.5} delay={1.2} spread={105} /></span></span>
-            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine2} speed={4.5} delay={1.2} spread={105} /></span></span>
+            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine1} color={theme === 'light' ? '#242426' : '#f4f4f3'} shineColor={theme === 'light' ? '#656568' : '#ffffff'} speed={4.5} delay={1.2} spread={105} /></span></span>
+            <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine2} color={theme === 'light' ? '#242426' : '#f4f4f3'} shineColor={theme === 'light' ? '#656568' : '#ffffff'} speed={4.5} delay={1.2} spread={105} /></span></span>
           </h1>
           <div className="hero-bottom">
           <p>{text.heroDescription}</p>
