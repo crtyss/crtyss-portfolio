@@ -725,7 +725,7 @@ function App() {
           <div className="hero-ui-window">
             <div className="hero-ui-window-bar"><span>FORM STUDY / 10</span><i /><i /><i /></div>
             <div className="hero-ui-window-body">
-              <img src="/assets/portfolio/hero-dotfield.jpg" alt="" />
+              <img src="/assets/portfolio/hero-blue-form.jpg" alt="" />
               <div className="hero-ui-panel">
                 <span>GATER / OBJECT 01</span>
                 <strong>CALM<br />MECHANICS</strong>
