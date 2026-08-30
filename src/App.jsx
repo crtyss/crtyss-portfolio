@@ -679,7 +679,7 @@ function App() {
         <div className="hero-opening-curtain" aria-hidden="true" />
         <div className="hero-content shell">
           <p className="eyebrow hero-eyebrow"><span /> {text.heroEyebrow}</p>
-          <h1 id="hero-title" className="hero-title">
+          <h1 id="hero-title" className={`hero-title ${language === 'en' ? 'hero-title-en' : ''}`}>
             <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine1} speed={4.5} delay={1.2} spread={105} /></span></span>
             <span className="hero-title-line"><span className="hero-title-mask"><ShinyText text={text.heroLine2} speed={4.5} delay={1.2} spread={105} /></span></span>
           </h1>
