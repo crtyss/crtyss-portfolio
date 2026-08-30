@@ -105,11 +105,11 @@ html.has-pointer-effects body, html.has-pointer-effects body * { cursor: none; }
 @keyframes line-breathe { 0%, 100% { opacity: .35; transform: scaleX(.72); } 50% { opacity: .9; transform: scaleX(1); } }
 .hero-content { position: relative; z-index: 2; height: 100%; padding-top: clamp(230px, 28vh, 310px); display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 58px; }
 .hero-eyebrow { color: rgba(255,255,255,.75); }
-.hero h1 { max-width: 920px; margin: 24px 0 auto; font-size: clamp(64px, 6.3vw, 118px); line-height: 1.07; letter-spacing: 0; font-weight: 600; }
+.hero h1 { max-width: 920px; margin: 24px 0 auto; font-size: clamp(64px, 6.3vw, 118px); line-height: 1.14; letter-spacing: 0; font-weight: 600; }
 .hero-title-en { max-width: 1140px !important; }
 .hero-title-en .hero-title-mask { white-space: normal; }
 .hero-title-en .shiny-text { display: inline; }
-.hero-title-line { display: block; overflow: hidden; }
+.hero-title-line { display: block; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
 .hero-title-mask { display: block; transform-origin: left bottom; }
 .hero-bottom { display: flex; align-items: end; justify-content: space-between; }
 .hero-bottom p { margin: 0; color: rgba(255,255,255,.76); font-size: 16px; line-height: 1.7; }
@@ -361,7 +361,7 @@ html.has-pointer-effects body, html.has-pointer-effects body * { cursor: none; }
   .hero-ui-orbit.orbit-one { width: 125vw; right: -45vw; top: 2%; }
   .hero-ui-orbit.orbit-two { width: 92vw; right: -8vw; top: 29%; }
   .hero-content { padding-top: 180px; padding-bottom: 38px; }
-  .hero h1 { font-size: clamp(32px, 10.3vw, 44px); }
+  .hero h1 { font-size: clamp(32px, 10.3vw, 44px); line-height: 1.18; }
   .hero-title-en { max-width: 100% !important; }
   .hero-bottom p { font-size: 13px; }
   .hero-metric { display: none; }
