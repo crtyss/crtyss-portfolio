@@ -5,10 +5,17 @@ import {
   ArrowDown,
   ArrowLeft,
   ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
   Download,
   Menu,
+  Music2,
   Moon,
+  Pause,
+  Play,
   Plus,
+  SkipBack,
+  SkipForward,
   Sun,
   X,
 } from 'lucide-react'
@@ -204,17 +211,17 @@ const localized = (item, key, language) => language === 'en' && item[`${key}En`]
 
 const copy = {
   zh: {
-    navAbout: '关于我', navProjects: '产品作品', navImaging: '影像', navCapabilities: '能力', contact: '联系我', menu: '菜单', close: '关闭',
-    navigation: 'NAVIGATION / 导航', home: '返回首页', selectedWork: '产品作品', viewProject: '查看项目',
+    navAbout: '关于我', navProjects: '产品', navImaging: '影像', navCapabilities: '能力', contact: '联系我', menu: '菜单', close: '关闭',
+    navigation: 'NAVIGATION / 导航', home: '返回首页', selectedWork: '产品', viewProject: '查看项目',
     heroEyebrow: 'PRODUCT DESIGN PORTFOLIO / 2024 - 2025', heroLine1: '为日常，', heroLine2: '设计更好的感受。',
     heroDescription: <>Crtyss 是一名关注人与物关系的产品设计师，<br />以克制的形态，回应真实的使用。</>, seeAbout: '查看个人经历', selectedProjects: 'PRODUCT<br />WORK', productDesigner: 'PRODUCT<br />DESIGNER',
     aboutKicker: 'ABOUT / 关于', aboutTitle: <>为真实生活<br />留下恰好的设计。</>, aboutLead: '从产品形态到使用体验，持续探索设计如何更轻、更准地参与日常。', selfPortrait: 'Crtyss 二次元自画像', profile: 'PROFILE', profileText: '就读于湖南涉外经济学院艺术设计专业。系统学习产品设计理论与实践，重视从具体需求出发完成从概念、建模到呈现和验证的完整表达。', education: 'EDUCATION', school: '湖南涉外经济学院 / 艺术设计', location: 'LOCATION', locationValue: '湖南张家界', locationNote: '开放合作与交流',
     facts: ['设计赛事奖项与作品入选', '学校专项奖学金', '年视觉中国 500px 签约供稿', '覆盖产品、家具、文创等方向'],
-    projectKicker: 'PRODUCT WORK / 产品作品', projectTitle: <>让形态服务于<br />更好的体验。</>, projectLead: '从产品概念到视觉呈现，收录十个关注人、空间与文化体验的设计片段。',
+    projectKicker: 'PRODUCT WORK / 产品', projectTitle: <>让形态服务于<br />更好的体验。</>, projectLead: '从产品概念到视觉呈现，收录十个关注人、空间与文化体验的设计片段。',
     imagingKicker: 'IMAGE STUDIES / 影像', imagingTitle: <>让设计停留在<br />被感知的瞬间。</>, imagingLead: '记录材质、光线与形态在镜头中的变化，让作品在静止中保持呼吸。', imagingScrollTitle: '向自然借一束光', imagingScrollHint: 'SCROLL TO EXPAND / 向下滚动展开', imagingOverlayKicker: 'IMAGE STUDY / 03', imagingOverlayTitle: '在路径交汇处，重新看见方向。', imagingOverlayLead: '影像不是装饰，而是让设计、环境与人的感受彼此相遇的一种方式。',
     capabilities: 'CAPABILITIES / 能力', capabilityTitle: <>从洞察到落地，<br />保持每一步的清晰。</>, recognition: 'RECOGNITION', recognitionText: <>米兰设计周多项获奖<br />G-Cross 设计大赛铜奖<br />楚怡杯省级奖项</>, software: '掌握的软件',
     contactEyebrow: "LET'S CREATE SOMETHING MEANINGFUL", contactTitle: <>让下一件产品，<br />更贴近真实的生活。</>, resume: '获取完整简历', collaboration: <>期待与品牌、团队和创作者展开产品设计合作。<br />联系方式可在更新后的简历中补充。</>,
-    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回产品作品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录', personalImaging: '个人影像', personalImagingTitle: '个人影像即将展开。', personalImagingLead: '这里将记录镜头中的光线、路径与日常片段。摄影作品正在整理中。', backHome: '返回首页',
+    overview: 'OVERVIEW / 项目概览', visualRecord: 'VISUAL RECORD / 视觉记录', images: 'IMAGES', category: 'CATEGORY', year: 'YEAR', objectStudy: 'CRTYSS / OBJECT STUDY', endProject: 'END OF PROJECT', returnWorks: '返回产品', notFound: <>这个项目暂时<br />还没有被收录。</>, projectNotFound: '404 / PROJECT NOT FOUND', closeProject: '关闭项目详情', workShowcase: '作品展示', visualRecordAlt: '视觉记录', personalImaging: '个人影像', personalImagingTitle: '个人影像即将展开。', personalImagingLead: '这里将记录镜头中的光线、路径与日常片段。摄影作品正在整理中。', backHome: '返回首页',
   },
   en: {
     navAbout: 'About', navProjects: 'Product Work', navImaging: 'Imaging', navCapabilities: 'Capabilities', contact: 'Contact', menu: 'Menu', close: 'Close',
@@ -387,6 +394,121 @@ function PointerEffects() {
     <div className="pointer-effects-layer" aria-hidden="true">
       <div className="pointer-orb"><span /></div>
     </div>
+  )
+}
+
+const musicTracks = [
+  { title: '心臓作り', titleEn: 'Heart Making', artist: 'CRTYSS / 01', src: '/assets/audio/track-01-heart.m4a' },
+  { title: '透明通信', titleEn: 'Transparent Signal', artist: 'CRTYSS / 02', src: '/assets/audio/track-02-transparent.m4a' },
+  { title: '万雷', titleEn: 'Thunder', artist: 'CRTYSS / 03', src: '/assets/audio/track-03-thunder.m4a' },
+  { title: '心象', titleEn: 'Impression', artist: 'CRTYSS / 04', src: '/assets/audio/track-04-impression.m4a' },
+  { title: '夜の街灯', titleEn: 'Night Lamp', artist: 'CRTYSS / 05', src: '/assets/audio/track-05-night-lamp.m4a' },
+  { title: '紀行', titleEn: 'Journey', artist: 'CRTYSS / 06', src: '/assets/audio/track-06-journey.m4a' },
+  { title: '溺死事件', titleEn: 'Drowning Incident', artist: 'CRTYSS / 07', src: '/assets/audio/track-07-drowning.m4a' },
+]
+
+const musicLabels = {
+  zh: { music: '音乐', nowPlaying: '正在播放', play: '播放', pause: '暂停', previous: '上一首', next: '下一首', collapse: '收起播放器', expand: '展开播放器' },
+  en: { music: 'Music', nowPlaying: 'Now playing', play: 'Play', pause: 'Pause', previous: 'Previous track', next: 'Next track', collapse: 'Collapse player', expand: 'Expand player' },
+}
+
+function formatTime(value) {
+  if (!Number.isFinite(value) || value < 0) return '00:00'
+  const minutes = Math.floor(value / 60).toString().padStart(2, '0')
+  const seconds = Math.floor(value % 60).toString().padStart(2, '0')
+  return `${minutes}:${seconds}`
+}
+
+function MusicPlayer({ language }) {
+  const audioRef = useRef(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [trackIndex, setTrackIndex] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const labels = musicLabels[language]
+  const track = musicTracks[trackIndex]
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return undefined
+
+    audio.src = track.src
+    audio.load()
+    setProgress(0)
+    setDuration(0)
+    if (isPlaying) {
+      audio.play().catch(() => setIsPlaying(false))
+    }
+    return undefined
+  }, [track.src])
+
+  const togglePlayback = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (audio.paused) {
+      audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false))
+    } else {
+      audio.pause()
+      setIsPlaying(false)
+    }
+  }
+
+  const changeTrack = (direction) => {
+    setTrackIndex((current) => (current + direction + musicTracks.length) % musicTracks.length)
+  }
+
+  const handleEnded = () => {
+    setTrackIndex((current) => (current + 1) % musicTracks.length)
+    setIsPlaying(true)
+  }
+
+  const handleSeek = (event) => {
+    const nextTime = Number(event.target.value)
+    const audio = audioRef.current
+    if (!audio || !Number.isFinite(nextTime)) return
+    audio.currentTime = nextTime
+    setProgress(nextTime)
+  }
+
+  const title = language === 'en' ? track.titleEn : track.title
+  const trackNumber = String(trackIndex + 1).padStart(2, '0')
+
+  return (
+    <aside className={`music-player ${isOpen ? 'is-open' : ''} ${isPlaying ? 'is-playing' : ''}`} aria-label={labels.music}>
+      <div className="music-player-panel" aria-hidden={!isOpen}>
+        <div className="music-player-info">
+          <button className="music-player-play" data-cursor-interactive data-cursor-magnetic onClick={togglePlayback} aria-label={isPlaying ? labels.pause : labels.play} title={isPlaying ? labels.pause : labels.play}>
+            {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
+          </button>
+          <div className="music-player-track">
+            <span>{labels.nowPlaying} / {trackNumber}</span>
+            <strong>{title}</strong>
+            <small>{track.artist}</small>
+          </div>
+          <button className="music-player-close" data-cursor-interactive data-cursor-magnetic onClick={() => setIsOpen(false)} aria-label={labels.collapse} title={labels.collapse}>
+            <ChevronRight size={16} />
+          </button>
+        </div>
+        <div className="music-player-progress">
+          <span>{formatTime(progress)}</span>
+          <input type="range" min="0" max={duration || 0} step="0.1" value={Math.min(progress, duration || 0)} onChange={handleSeek} style={{ '--music-progress': `${duration ? (progress / duration) * 100 : 0}%` }} aria-label={language === 'en' ? 'Playback progress' : '播放进度'} />
+          <span>{formatTime(duration)}</span>
+        </div>
+        <div className="music-player-controls">
+          <button data-cursor-interactive data-cursor-magnetic onClick={() => changeTrack(-1)} aria-label={labels.previous} title={labels.previous}><SkipBack size={15} /></button>
+          <button data-cursor-interactive data-cursor-magnetic onClick={() => changeTrack(1)} aria-label={labels.next} title={labels.next}><SkipForward size={15} /></button>
+          <span>{trackNumber} / {String(musicTracks.length).padStart(2, '0')}</span>
+        </div>
+      </div>
+      <button className="music-player-tab" data-cursor-interactive data-cursor-magnetic onClick={() => setIsOpen((open) => !open)} aria-expanded={isOpen} aria-label={isOpen ? labels.collapse : labels.expand} title={isOpen ? labels.collapse : labels.expand}>
+        <span className="music-player-icon"><Music2 size={15} /></span>
+        <span className="music-player-tab-label">{labels.music}</span>
+        <span className="music-player-tab-index">{trackNumber}</span>
+        {isOpen ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+      </button>
+      <audio ref={audioRef} preload="metadata" onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)} onTimeUpdate={(event) => setProgress(event.currentTarget.currentTime)} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={handleEnded} />
+    </aside>
   )
 }
 
@@ -637,6 +759,7 @@ function App() {
   return (
     <main ref={mainRef}>
       <PointerEffects />
+      <MusicPlayer language={language} />
       <header className={`site-header ${route.type === 'detail' || theme === 'light' ? 'site-header-light' : ''}`} aria-label={language === 'en' ? 'Main navigation' : '主导航'}>
         <button className="brand" data-cursor-interactive data-cursor-magnetic onClick={() => goHome()} aria-label={text.home}>
           <img className="brand-mark" src="/assets/portfolio/profile-crtyss.jpg" alt="" />
