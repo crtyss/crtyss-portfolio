@@ -47,7 +47,7 @@ html.has-pointer-effects body, html.has-pointer-effects body * { cursor: none; }
 .brand-mark { display: block; flex: 0 0 40px; width: 40px; height: 40px; object-fit: cover; object-position: center 30%; border-radius: 12px; background: #d9e6d2; box-shadow: 0 4px 12px rgba(0,0,0,.16); }
 .brand b { display: block; font-size: 13px; line-height: 1.14; font-weight: 700; }
 .brand small { display: block; margin-top: 3px; font-family: 'DM Mono', monospace; font-size: 7px; letter-spacing: .07em; opacity: .72; }
-.nav-links { display: flex; align-items: center; gap: 3px; padding: 4px; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; background: rgba(255,255,255,.055); }
+.nav-links { position: absolute; left: 50%; display: flex; align-items: center; gap: 3px; padding: 4px; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; background: rgba(255,255,255,.055); transform: translateX(-50%); }
 .nav-links button { min-width: 72px; min-height: 36px; color: rgba(255,255,255,.72); background: transparent; padding: 8px 12px; border-radius: 8px; font-size: 13px; transition: color .25s ease, background .25s ease, transform .25s ease; }
 .nav-links button:hover { color: #fff; background: rgba(255,255,255,.1); border-radius: 8px; }
 .nav-links button:active { transform: translateY(1px); }
