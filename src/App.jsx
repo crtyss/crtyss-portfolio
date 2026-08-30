@@ -627,7 +627,7 @@ function App() {
             <span className={language === 'zh' ? 'is-active' : ''}>中</span><i>/</i><span className={language === 'en' ? 'is-active' : ''}>EN</span>
           </button>
           <button
-            className="theme-toggle"
+            className={`theme-toggle ${theme === 'light' ? 'is-light' : 'is-dark'}`}
             data-cursor-interactive
             data-cursor-magnetic
             onClick={toggleTheme}
@@ -636,10 +636,13 @@ function App() {
               ? (language === 'en' ? 'Switch to light mode' : '切换到浅色模式')
               : (language === 'en' ? 'Switch to dark mode' : '切换到深色模式')}
           >
-            <span className={`theme-toggle-thumb ${theme === 'light' ? 'is-light' : ''}`} aria-hidden="true">
+            <span className="theme-toggle-track" aria-hidden="true">
+              <Moon className="theme-toggle-icon theme-toggle-moon" size={12} />
+              <Sun className="theme-toggle-icon theme-toggle-sun" size={12} />
+              <span className="theme-toggle-thumb">
               {theme === 'dark' ? <Moon size={12} /> : <Sun size={12} />}
+              </span>
             </span>
-            <span className="theme-toggle-label">{theme === 'dark' ? 'DARK' : 'LIGHT'}</span>
           </button>
           <button className="contact-button" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
             {text.contact} <ArrowUpRight size={16} strokeWidth={2.25} />
