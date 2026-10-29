@@ -1,0 +1,24 @@
+[Unit]
+Description=Crtyss portfolio content backend
+After=network.target
+[Service]
+Type=simple
+User=crtyss
+Group=crtyss
+WorkingDirectory=/home/crtyss/portfolio/releases/20261029-admin
+Environment=NODE_ENV=production
+Environment=DATA_DIR=/home/crtyss/portfolio/data
+Environment=PORT=3001
+Environment=HOST=127.0.0.1
+Environment=PUBLIC_ORIGIN=http://111.8.201.55:8089
+ExecStart=/home/crtyss/portfolio/runtime/node/bin/node server/index.mjs
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/crtyss/portfolio/data
+[Install]
+WantedBy=multi-user.target
