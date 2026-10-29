@@ -5,7 +5,7 @@ After=network.target
 Type=simple
 User=crtyss
 Group=crtyss
-WorkingDirectory=/home/crtyss/portfolio/releases/20261029-admin
+WorkingDirectory=/home/crtyss/portfolio/releases/20261029-technical
 Environment=NODE_ENV=production
 Environment=DATA_DIR=/home/crtyss/portfolio/data
 Environment=PORT=3001

@@ -1,13 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 base=/home/crtyss/portfolio
-release=$base/releases/20261029-admin
+release=$base/releases/20261029-technical
 [ "$(id -u)" -eq 0 ] || { echo '请使用 sudo 运行'; exit 1; }
 [ -f "$base/data/credentials.json" ]
 [ -f "$release/dist/index.html" ]
 backup=$(mktemp -d /home/crtyss/backups/admin-activation-XXXXXXXX)
 cp -a /etc/nginx/sites-available/lin-studio "$backup/nginx.conf"
 cp -a /var/www/lin-studio "$backup/site"
+cp -a "$base/data" "$backup/data"
 if [ -f /etc/systemd/system/crtyss-portfolio.service ]; then cp -a /etc/systemd/system/crtyss-portfolio.service "$backup/service"; fi
 rollback() {
     echo "启用失败，恢复旧站；备份位于 $backup"
@@ -15,6 +16,7 @@ rollback() {
     rsync -a --delete "$backup/site/" /var/www/lin-studio/
     if [ -f "$backup/service" ]; then cp "$backup/service" /etc/systemd/system/crtyss-portfolio.service; else systemctl disable --now crtyss-portfolio.service || true; rm -f /etc/systemd/system/crtyss-portfolio.service; fi
     systemctl daemon-reload
+    if [ -f "$backup/service" ]; then systemctl restart crtyss-portfolio.service; fi
     nginx -t && systemctl reload nginx
 }
 trap rollback ERR
@@ -36,7 +38,15 @@ for route in works imaging; do
     fi
 done
 systemctl reload nginx
-curl -fsS -H 'Host: 111.8.201.55:8089' http://127.0.0.1/api/admin/session
+# Reload is asynchronous; wait for new workers to expose the new route behavior.
+for attempt in {1..15}; do
+    code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: 111.8.201.55:8089' http://127.0.0.1/works/deployment-missing)
+    if [ "$code" = 404 ]; then break; fi
+    sleep 1
+done
+[ "$code" = 404 ]
+curl -fsS -H 'Host: 111.8.201.55:8089' http://127.0.0.1/api/admin/session | python3 -c 'import json,sys; assert isinstance(json.load(sys.stdin)["authenticated"],bool)'
+curl -fsS -H 'Host: 111.8.201.55:8089' http://127.0.0.1/works/mouse >/dev/null
 trap - ERR
 echo
 echo '上线成功：http://111.8.201.55:8089/  管理入口：http://111.8.201.55:8089/admin'
