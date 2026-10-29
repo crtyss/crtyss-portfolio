@@ -439,6 +439,8 @@ function App() {
   const mainRef = useRef(null)
   const text = copy[language]
   const homeSeen = useRef(false)
+  const homeAnimation = useRef(null)
+  const subpageRef = useRef(null)
   const positions = useRef(new Map())
   const entry = useRef(window.history.state?.portfolioKey || 'initial')
   const pendingPosition = useRef(null)
@@ -453,7 +455,7 @@ function App() {
   }, [language, route.type])
 
   const savePosition = () => {
-    positions.current.set(entry.current, window.scrollY)
+    positions.current.set(entry.current, route.type === 'home' ? window.scrollY : (subpageRef.current?.scrollTop || 0))
     if (route.type === 'home') homePosition.current = window.scrollY
   }
   const goTo = (path, { scrollTo, restoreHome = false } = {}) => {
@@ -485,7 +487,7 @@ function App() {
     const previous = window.history.scrollRestoration
     window.history.scrollRestoration = 'manual'
     window.history.replaceState({ ...window.history.state, portfolioKey: entry.current }, '')
-    const save = () => positions.current.set(entry.current, window.scrollY)
+    const save = () => { if (!subpageRef.current) positions.current.set(entry.current, window.scrollY) }
     const onPopState = () => {
       entry.current = window.history.state?.portfolioKey || 'initial'
       pendingPosition.current = { top: positions.current.get(entry.current) || 0 }
@@ -523,8 +525,9 @@ function App() {
   }, [activeProject, mobileMenuOpen])
 
   useLayoutEffect(() => {
-    const app = mainRef.current
-    if (!app) return undefined
+    const isHome = route.type === 'home'
+    const app = isHome ? mainRef.current?.querySelector('.home-page') : subpageRef.current
+    if (!app || (isHome && homeAnimation.current)) return undefined
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const context = gsap.context(() => {
@@ -585,11 +588,11 @@ function App() {
           const detailIntro = detail.querySelector('.detail-intro')
           const detailGallery = detail.querySelector('.detail-gallery')
           if (detailCover) gsap.fromTo(detailCover, { clipPath: 'inset(0 0 100% 0)', scale: 1.04 }, { clipPath: 'inset(0 0 0% 0)', scale: 1, duration: .55, delay: .05, ease: 'power4.out' })
-          if (detailIntro) gsap.fromTo(detailIntro, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: .42, scrollTrigger: { trigger: detailIntro, start: 'top 94%', once: true, fastScrollEnd: 1200 }, ease: 'power3.out' })
+          if (detailIntro) gsap.fromTo(detailIntro, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: .42, scrollTrigger: { scroller: app, trigger: detailIntro, start: 'top 94%', once: true, fastScrollEnd: 1200 }, ease: 'power3.out' })
           if (detailGallery) detail.querySelectorAll('.detail-gallery-item').forEach((item) => {
             gsap.fromTo(item, { y: 22, opacity: 0 }, {
               y: 0, opacity: 1, duration: .42, ease: 'power3.out',
-              scrollTrigger: { trigger: item, start: 'top 94%', once: true, fastScrollEnd: 1200 },
+              scrollTrigger: { scroller: app, trigger: item, start: 'top 94%', once: true, fastScrollEnd: 1200 },
             })
           })
         }
@@ -599,40 +602,40 @@ function App() {
       motionImages.forEach((image) => {
         const owner = image.closest('.portrait-card, .project-card, .contact-art, .detail-cover, .detail-gallery-item')
         if (!owner) return
-        gsap.fromTo(image, { clipPath: 'inset(3% 0 0 0)', scale: 1.025 }, { clipPath: 'inset(0% 0 0 0)', scale: 1, duration: .5, ease: 'power3.out', scrollTrigger: { trigger: owner, start: 'top 94%', once: true, fastScrollEnd: 1200 } })
+        gsap.fromTo(image, { clipPath: 'inset(3% 0 0 0)', scale: 1.025 }, { clipPath: 'inset(0% 0 0 0)', scale: 1, duration: .5, ease: 'power3.out', scrollTrigger: { ...(isHome ? {} : { scroller: app }), trigger: owner, start: 'top 94%', once: true, fastScrollEnd: 1200 } })
       })
 
       gsap.delayedCall(.45, () => ScrollTrigger.refresh())
     }, app)
 
+    if (isHome) { homeAnimation.current = context; return undefined }
     return () => context.revert()
   }, [route.type, route.projectId, projects])
 
+  useEffect(() => () => { homeAnimation.current?.revert(); homeAnimation.current = null }, [])
+
   useLayoutEffect(() => {
+    const covered = route.type !== 'home'
+    document.documentElement.toggleAttribute('data-subpage', covered)
+    // The home document stays mounted at its scroll position behind the subpage.
+    // Only the fixed subpage scrolls, so returning needs no scrolling animation.
+    ScrollTrigger.getAll().forEach(trigger => {
+      if (trigger.trigger?.closest('.home-page')) {
+        if (covered) trigger.disable(false)
+        else trigger.enable(false, false)
+      }
+    })
     const target = pendingPosition.current
-    if (!target) return
     pendingPosition.current = null
-    const app = mainRef.current
-    const apply = () => {
-      if (target.section) {
-        const element = document.getElementById(target.section)
-        if (element) window.scrollTo({ top: Math.max(0, element.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(element).scrollMarginTop || '0')), behavior: 'instant' })
-      } else window.scrollTo({ top: target.top, behavior: 'instant' })
+    if (covered) {
+      if (subpageRef.current) subpageRef.current.scrollTo({ top: target?.top || 0, behavior: 'instant' })
+    } else if (target?.section) {
+      const element = document.getElementById(target.section)
+      if (element) window.scrollTo({ top: Math.max(0, element.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(element).scrollMarginTop || '0')), behavior: 'instant' })
+    } else if (target && Math.abs(window.scrollY - target.top) > 1) {
+      window.scrollTo({ top: target.top, behavior: 'instant' })
     }
-    apply()
-    const frame = requestAnimationFrame(() => { apply(); ScrollTrigger.refresh() })
-    const stop = () => app.removeEventListener('load', apply, true)
-    app.addEventListener('load', apply, true)
-    window.addEventListener('wheel', stop, { once: true, passive: true })
-    window.addEventListener('touchstart', stop, { once: true, passive: true })
-    window.addEventListener('keydown', stop, { once: true })
-    const timeout = setTimeout(stop, 3000)
-    return () => {
-      cancelAnimationFrame(frame); clearTimeout(timeout); stop()
-      window.removeEventListener('wheel', stop)
-      window.removeEventListener('touchstart', stop)
-      window.removeEventListener('keydown', stop)
-    }
+    return () => document.documentElement.removeAttribute('data-subpage')
   }, [route])
 
   return (
@@ -707,6 +710,7 @@ function App() {
       </div>
       {mobileMenuOpen && <button className="mobile-menu-scrim" onClick={() => setMobileMenuOpen(false)} aria-label={language === 'en' ? 'Close menu backdrop' : '关闭菜单背景'} />}
 
+      {route.type !== 'home' && <div className="route-page" ref={subpageRef} onScroll={event => positions.current.set(entry.current, event.currentTarget.scrollTop)}>
       {route.type === 'admin' ? <Admin onContent={(data) => setProjects(data.projects)} /> : route.type === 'detail' ? (
         <ProjectDetail
           projects={projects}
@@ -718,7 +722,9 @@ function App() {
         />
       ) : route.type === 'imaging' ? (
         <PhotoGallery onHome={() => returnHome('imaging')} language={language} />
-      ) : <>
+      ) : null}
+      </div>}
+      <div className="home-page" inert={route.type !== 'home'} aria-hidden={route.type !== 'home'} data-covered={route.type !== 'home'}>
       <section className="hero" id="home" aria-labelledby="hero-title">
         <GeometryHero />
         <div className="hero-veil" />
@@ -853,7 +859,7 @@ function App() {
           <footer><span>CRTYSS / PRODUCT DESIGNER</span><span>© {new Date().getFullYear()}</span></footer>
         </div>
       </section>
-      </>}
+      </div>
 
       {activeProject && (
         <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setActiveProject(null)}>

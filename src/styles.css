@@ -802,3 +802,11 @@ html[data-theme='light'] .imaging-still figcaption { color: #626268; }
   .nav-links button { min-width: 0; padding-inline: 9px; font-size: 12px; white-space: nowrap; }
   .brand, .header-actions { flex-shrink: 0; }
 }
+
+/* Keep the home document and its reading position intact beneath subpages. */
+html { scrollbar-gutter: stable; }
+html[data-subpage], html[data-subpage] body { overflow: hidden; }
+.home-page[data-covered="true"] { visibility: hidden; pointer-events: none; }
+.route-page { position: fixed; inset: 0; z-index: 20; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; scroll-behavior: smooth; background: var(--page-bg); }
+@media (prefers-reduced-motion: reduce) { .route-page { scroll-behavior: auto; } }
+.home-page { overflow-anchor: none; }
