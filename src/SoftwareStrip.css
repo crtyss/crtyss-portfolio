@@ -28,3 +28,13 @@
 .kfc-trigger:focus-visible { outline: 2px solid #e4002b; outline-offset: 4px; }
 .software-strip[data-egg-open="true"] .software-track, .software-strip:has(.kfc-trigger:focus-visible) .software-track { animation-play-state: paused; }
 .kfc-loading { position: fixed; z-index: 100; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 14px 22px; border-radius: 8px; background: #e4002b; color: #fff9ef; font-size: 13px; box-shadow: 0 8px 30px #0003; }
+
+/* A quiet warm tint is the only visual hint for the hidden item. */
+.software-item-kfc .software-name { font-weight: 600; letter-spacing: .02em; background: linear-gradient(110deg,#9d4653,#a98a63,#a85e66,#9d4653); background-size: 220% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; animation: kfc-color-flow 14s ease-in-out infinite alternate; }
+.kfc-trigger { background: #fff; box-shadow: 0 1px 4px #0000000d; }
+.kfc-trigger:hover { transform: translateY(-1px); box-shadow: 0 2px 7px #00000014; }
+.kfc-trigger img { width: 36px; height: 36px; border-radius: 7px; }
+html[data-theme='dark'] .software-item-kfc .software-name { background-image: linear-gradient(110deg,#d79ca4,#d8bd98,#d7a4ae,#d79ca4); }
+.software-strip:not([data-playing="true"]) .software-item-kfc .software-name, .home-page[data-covered="true"] .software-item-kfc .software-name { animation-play-state: paused; }
+@keyframes kfc-color-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media(prefers-reduced-motion:reduce) { .software-item-kfc .software-name { animation: none; } }

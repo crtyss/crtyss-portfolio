@@ -23,7 +23,7 @@ export default function KfcResume({ onClose }) {
     <article className="kfc-sheet">
       <button className="kfc-close" aria-label="关闭隐藏简历" onClick={onClose} autoFocus><X size={22} /></button>
       <header className="kfc-resume-header">
-        <div className="kfc-resume-masthead"><img src="/assets/software/kfc.svg" alt="KFC" /><span>SECRET MENU<br />PERSONAL RÉSUMÉ / NO. 0050</span></div>
+        <div className="kfc-resume-masthead"><img src="/assets/software/kfc-colonel.png" alt="KFC" /><span>SECRET MENU<br />PERSONAL RÉSUMÉ / NO. 0050</span></div>
         <div className="kfc-sticker"><Star size={18} fill="currentColor" /><span>野生人才<br />限时掉落</span></div>
         <p className="kfc-name">CRTYSS · 又名 大卫·戴</p>
         <h1 id="kfc-resume-title">个人 KFC<br /><em>疯狂点餐专家</em></h1>

@@ -12,7 +12,7 @@ const software = [
   ['unity', 'Unity', 'unity.svg', true],
   ['blender', 'Blender', 'blender.svg', true],
   ['codex', 'Codex', 'codex.png'],
-  ['kfc', 'KFC', 'kfc.svg', true],
+  ['kfc', 'KFC', 'kfc-colonel.png', true],
   ['deepseek', 'DeepSeek', 'deepseek.png'],
   ['js-design', '即时设计', 'js-design.png'],
   ['bambu', 'Bambu Studio', 'bambulab.png'],
@@ -85,7 +85,7 @@ export default function SoftwareStrip({ label }) {
     <div className="software-strip" ref={ref} role="region" aria-label={label} data-cursor-interactive onPointerDown={startDrag} onLostPointerCapture={finishDrag} tabIndex={0} data-playing={playing} data-egg-open={eggOpen} onClickCapture={event => { if (event.detail > 0 && suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false } }} style={{ '--software-count': software.length }}>
       <div className="software-track">
         {[0, 1].map(copy => <ul key={copy} className="software-group" aria-hidden={copy === 1 ? true : undefined}>
-          {software.map(([id, name, image, symbol]) => <li key={id} className="software-item">
+          {software.map(([id, name, image, symbol]) => <li key={id} className={`software-item ${id === 'kfc' ? 'software-item-kfc' : ''}`}>
             {id === 'kfc' ? <button type="button" className="software-icon software-icon-symbol kfc-trigger" aria-label="KFC：打开隐藏个人简历" tabIndex={copy === 1 ? -1 : 0} onClick={event => {
               event.currentTarget.focus({ preventScroll: true })
               finishDrag()
