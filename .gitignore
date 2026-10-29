@@ -8,3 +8,6 @@ npm-debug.log*
 pnpm-debug.log*
 
 server/data/
+
+test-results/
+playwright-report/

@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import './GeometryHero.css'
 
-export default function GeometryHero() {
+export default function GeometryHero({ active = true }) {
   const canvasRef = useRef(null)
   const materialLabelRef = useRef(null)
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState(false)
 
+  const [started, setStarted] = useState(active)
+  useEffect(() => { if (active) setStarted(true) }, [active])
   useEffect(() => {
+    if (!started) return
     let disposed = false
     let cleanup
     import('./geometry-scene').then(({ mountGeometryScene }) => {
@@ -19,7 +22,7 @@ export default function GeometryHero() {
       })
     }).catch(() => { if (!disposed) setFailed(true) })
     return () => { disposed = true; cleanup?.() }
-  }, [])
+  }, [started])
 
   return (
     <div className="geometry-stage" aria-hidden="true">

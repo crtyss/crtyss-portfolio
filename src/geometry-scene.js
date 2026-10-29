@@ -15,9 +15,9 @@ const profiles = [
 
 // A closed ribbon with a rounded rectangular section and three half twists.
 // Differential normals keep both parameter seams smooth, including the half-turn seam.
-function ribbonGeometry() {
-  const segments = 320
-  const sides = 64
+function ribbonGeometry(compact) {
+  const segments = compact ? 160 : 320
+  const sides = compact ? 32 : 64
   const positions = []
   const normals = []
   const uvs = []
@@ -59,6 +59,9 @@ function ribbonGeometry() {
 }
 
 export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
+  const compact = window.matchMedia('(pointer: coarse)').matches
+  const textureRoot = root + (compact ? 'mobile/' : '')
+  const covered = () => document.documentElement.hasAttribute('data-subpage')
   let renderer
   try {
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' })
@@ -69,11 +72,11 @@ export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
   renderer.outputColorSpace = THREE.SRGBColorSpace
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = 1.12
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6))
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, compact ? 1.25 : 1.6))
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(34, 1, .1, 30)
   camera.position.set(0, 0, 5.8)
-  const geometry = ribbonGeometry()
+  const geometry = ribbonGeometry(compact)
   const material = new THREE.MeshPhysicalMaterial({
     transmission: 1, thickness: .42, ior: 1.46, roughness: .035,
     metalness: 0, clearcoat: .0001, clearcoatRoughness: .15,
@@ -142,7 +145,7 @@ export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
   }
   const tick = (now) => {
     frame = 0
-    if (disposed || !visible || document.hidden || motion.matches) return
+    if (disposed || !visible || covered() || document.hidden || motion.matches) return
     const interval = rotationMotion.active ? 1000 / 60 : 1000 / 30
     if (now - previous >= interval - .5) {
       const dt = Math.min((now - previous) / 1000, .08)
@@ -159,10 +162,10 @@ export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
     cancelAnimationFrame(frame)
     frame = 0
     if (!ready || disposed) return
-    if (document.hidden || !visible || motion.matches) endDrag()
+    if (document.hidden || covered() || !visible || motion.matches) endDrag()
     previous = performance.now()
     draw(performance.now())
-    if (visible && !document.hidden && !motion.matches) frame = requestAnimationFrame(tick)
+    if (visible && !covered() && !document.hidden && !motion.matches) frame = requestAnimationFrame(tick)
   }
   const resize = () => {
     const { width, height } = canvas.getBoundingClientRect()
@@ -224,6 +227,8 @@ export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
   resizeObserver.observe(canvas)
   const visibilityObserver = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; resume() })
   visibilityObserver.observe(canvas)
+  const pageObserver = new MutationObserver(resume)
+  pageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-subpage'] })
   const unsubscribeTheme = subscribeTheme(updateTheme)
   motion.addEventListener('change', resume)
   document.addEventListener('visibilitychange', resume)
@@ -240,7 +245,7 @@ export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
   resize()
 
   const loadTexture = async (name, colorSpace = THREE.NoColorSpace) => {
-    const texture = await new THREE.TextureLoader().loadAsync(root + name)
+    const texture = await new THREE.TextureLoader().loadAsync(textureRoot + name)
     if (disposed) { texture.dispose(); return null }
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping
     texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy())
@@ -317,6 +322,7 @@ export function mountGeometryScene(canvas, { onReady, onError, onMaterial }) {
     cancelAnimationFrame(frame)
     resizeObserver.disconnect()
     visibilityObserver.disconnect()
+    pageObserver.disconnect()
     unsubscribeTheme()
     motion.removeEventListener('change', resume)
     document.removeEventListener('visibilitychange', resume)

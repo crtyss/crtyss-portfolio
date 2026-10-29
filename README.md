@@ -45,3 +45,17 @@ npm run server
 2026-10-29 的整理保存了此前累积改动的完整状态，并按素材、应用功能、部署文档分类。它没有重建此前未提交的中间版本。
 
 请勿提交密码、`.env`、`server/data/`、`node_modules/` 或 `dist/`。
+
+## 回归检查与生产路由
+
+运行 `npm test` 会先构建，然后用独立的临时数据测试接口、备份、权限、404、分享元信息、接口失败重试、页面切换、主题及移动端材质。测试不连接真实作品数据库。首次在 Linux 环境运行前执行 `npx playwright install --with-deps chromium`；macOS 默认使用已安装的 Chrome，也可设置 `CHROME_BIN` 指定浏览器。
+
+GitHub Actions 会在推送和 PR 时执行同样的检查。
+
+页面 HTML 现在由 Node 服务按最新作品数据生成标题、描述、分享图片和 HTTP 状态码；Nginx 直接提供 `/assets/`，其他请求代理到后台。上线必须同步更新 `server/`、`shared/`、`src/projects.js`、`src/photography.json`、`dist/`、依赖及 Nginx 配置，不能仅替换 dist/index.html。启动后台前需要先完成构建。
+
+数据每次修改前自动保存快照到 `DATA_DIR/snapshots/`，保留最近 30 份。这些快照用于恢复误修改，不代替异机备份；服务器磁盘故障仍需独立备份保护。
+
+移动端材质由 `npm exec -- node scripts/prepare-mobile-materials.mjs` 从原始贴图生成；生成文件已入库。手机使用较小的贴图、网格与像素密度，桌面保留原始资源。直接打开二级页不会初始化首页 3D，已打开的首页会保留实例并在被覆盖时暂停动画。
+
+HTTPS 尚需可用的公网 TLS 入口及证书与自动续期配置。当前 HTTP 访问不能保护登录传输；确认网络条件前，不要将部署状态记录为已启用 HTTPS。

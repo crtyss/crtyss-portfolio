@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, ImagePlus, Plus, Trash2, Upload, X } from 'lucide-react'
-import collection from './photography.json'
-import { loadContent } from './content-api'
 import './PhotoGallery.css'
 
 const words = {
@@ -88,13 +86,12 @@ function PhotoViewer({ photo, index, total, language, onClose, onStep, onRemove 
   )
 }
 
-export default function PhotoGallery({ onHome, language }) {
+export default function PhotoGallery({ onHome, language, photos, status }) {
   const text = words[language]
-  const [photos, setPhotos] = useState(collection)
   const [filter, setFilter] = useState('all')
   const [activeId, setActiveId] = useState(null)
   const [error, setError] = useState('')
-  useEffect(() => { let disposed = false; loadContent().then(data => { if (!disposed) setPhotos(data.photos) }).catch(() => {}); return () => { disposed = true } }, [])
+
   const visible = photos.filter((photo) => filter === 'all' || (filter === 'personal' ? photo.personal : photo.category === filter))
   const activeIndex = visible.findIndex((photo) => photo.id === activeId)
   return (
@@ -110,10 +107,10 @@ export default function PhotoGallery({ onHome, language }) {
           <span className="photo-gallery-count" aria-live="polite">{String(visible.length).padStart(2, '0')} {text.count}</span>
         </div>
         {error && <p className="photo-error" role="alert">{error}</p>}
-        {visible.length ? <div className="photo-grid">{visible.map((photo, index) => <button className="photo-tile" key={photo.id} onClick={() => setActiveId(photo.id)} aria-label={`${text.view}: ${photoTitle(photo, language)}`}>
+        {status || (visible.length ? <div className="photo-grid">{visible.map((photo, index) => <button className="photo-tile" key={photo.id} onClick={() => setActiveId(photo.id)} aria-label={`${text.view}: ${photoTitle(photo, language)}`}>
           <div className="photo-tile-image" style={{ aspectRatio: `${photo.width} / ${photo.height}` }}><img src={photo.thumbnail} alt={photoTitle(photo, language)} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" width={photo.width} height={photo.height} /><span className="photo-tile-open"><ArrowUpRight size={21} /></span></div>
           <div className="photo-tile-caption"><span>{photoTitle(photo, language)}</span><small>{String(index + 1).padStart(2, '0')}</small></div>
-        </button>)}</div> : <div className="photo-empty"><ImagePlus size={38} strokeWidth={1} /><h2>{text.empty}</h2><p>{text.emptyLead}</p></div>}
+        </button>)}</div> : <div className="photo-empty"><ImagePlus size={38} strokeWidth={1} /><h2>{text.empty}</h2><p>{text.emptyLead}</p></div>)}
         <footer className="photo-gallery-footer"><span>CRTYSS / PHOTOGRAPHY</span><span>{text.more}</span><button onClick={onHome}>{text.back}<ArrowUpRight size={15} /></button></footer>
       </div>
       {activeIndex >= 0 && <PhotoViewer photo={visible[activeIndex]} index={activeIndex} total={visible.length} language={language} onClose={() => setActiveId(null)} onStep={(direction) => setActiveId(visible[(activeIndex + direction + visible.length) % visible.length].id)} /> }

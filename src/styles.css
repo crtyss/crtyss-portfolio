@@ -810,3 +810,5 @@ html[data-subpage], html[data-subpage] body { overflow: hidden; }
 .route-page { position: fixed; inset: 0; z-index: 20; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; scroll-behavior: smooth; background: var(--page-bg); }
 @media (prefers-reduced-motion: reduce) { .route-page { scroll-behavior: auto; } }
 .home-page { overflow-anchor: none; }
+.content-status { padding: 28px; text-align: center; color: var(--page-text); }
+.content-status button { margin-left: 12px; padding: 10px 16px; color: var(--page-text); background: transparent; border: 1px solid currentColor; border-radius: 8px; }

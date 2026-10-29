@@ -1,11 +1,11 @@
-import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GeometryHero from './GeometryHero'
 import PhotoGallery from './PhotoGallery'
-import initialProjects from './projects'
 import { projectHaptic } from './haptics'
-import Admin from './Admin'
+import { pageMeta, updatePageMeta } from '../shared/page-meta'
+const Admin = lazy(() => import('./Admin'))
 import { loadContent } from './content-api'
 import { getTheme, subscribeTheme, toggleTheme } from './theme'
 import {
@@ -123,10 +123,13 @@ function scrollToId(id) {
 
 function readRoute() {
   const match = window.location.pathname.match(/^\/works\/([^/]+)\/?$/)
-  if (match) return { type: 'detail', projectId: decodeURIComponent(match[1]) }
+  if (match) {
+    try { return { type: 'detail', projectId: decodeURIComponent(match[1]) } }
+    catch { return { type: 'notfound' } }
+  }
   if (/^\/admin\/?$/.test(window.location.pathname)) return { type: 'admin' }
   if (/^\/imaging\/?$/.test(window.location.pathname)) return { type: 'imaging' }
-  return { type: 'home' }
+  return { type: window.location.pathname === '/' ? 'home' : 'notfound' }
 }
 
 function PointerEffects() {
@@ -355,6 +358,7 @@ function MusicPlayer({ language }) {
 
 function ProjectDetail({ project, projects, onHome, onBack, onNavigate, language }) {
   const text = copy[language]
+
   if (!project) {
     return (
       <section className="project-detail project-not-found">
@@ -431,15 +435,24 @@ function ProjectDetail({ project, projects, onHome, onBack, onNavigate, language
 }
 
 function App() {
-  const [projects, setProjects] = useState(initialProjects)
-  useEffect(() => { loadContent().then(data => setProjects(data.projects)).catch(() => {}) }, [])
+  const [content, setContent] = useState({ projects: [], photos: [] })
+  const [contentState, setContentState] = useState('loading')
+  const refreshContent = async () => {
+    setContentState('loading')
+    try { setContent(await loadContent()); setContentState('ready') }
+    catch { setContent({ projects: [], photos: [] }); setContentState('error') }
+  }
+  useEffect(() => { refreshContent() }, [])
+  const projects = content.projects
+
   const [activeProject, setActiveProject] = useState(null)
   const [route, setRoute] = useState(readRoute)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [language, setLanguage] = useState(() => window.localStorage.getItem('crtyss-language') || 'zh')
+  const [language, setLanguage] = useState(() => { try { return window.localStorage.getItem('crtyss-language') === 'en' ? 'en' : 'zh' } catch { return 'zh' } })
   const theme = useSyncExternalStore(subscribeTheme, getTheme)
   const mainRef = useRef(null)
   const text = copy[language]
+  const contentStatus = contentState === 'ready' ? null : <div className="content-status" role={contentState === 'error' ? 'alert' : 'status'}>{contentState === 'error' ? (language === 'en' ? 'Unable to load works. ' : '作品暂时无法加载。') : (language === 'en' ? 'Loading works…' : '正在加载作品…')}{contentState === 'error' && <button onClick={refreshContent}>{language === 'en' ? 'Retry' : '重新加载'}</button>}</div>
   const homeSeen = useRef(false)
   const homeAnimation = useRef(null)
   const subpageRef = useRef(null)
@@ -447,18 +460,18 @@ function App() {
   const entry = useRef(window.history.state?.portfolioKey || 'initial')
   const pendingPosition = useRef(null)
   const homePosition = useRef(null)
+  const homeFocus = useRef(null)
+  const focusedEntry = useRef(null)
 
   useEffect(() => {
-    window.localStorage.setItem('crtyss-language', language)
+    try { window.localStorage.setItem('crtyss-language', language) } catch { /* Browsing still works when storage is unavailable. */ }
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN'
-    document.title = route.type === 'imaging'
-      ? (language === 'en' ? 'Photography — Crtyss' : '影像画廊 — Crtyss')
-      : (language === 'en' ? 'Crtyss - Product Designer' : 'Crtyss - 产品设计师')
-  }, [language, route.type])
+    updatePageMeta(pageMeta(location.pathname, content, language), location.pathname)
+  }, [language, route, content])
 
   const savePosition = () => {
     positions.current.set(entry.current, route.type === 'home' ? window.scrollY : (subpageRef.current?.scrollTop || 0))
-    if (route.type === 'home') homePosition.current = window.scrollY
+    if (route.type === 'home') { homePosition.current = window.scrollY; homeFocus.current = document.activeElement }
   }
   const goTo = (path, { scrollTo, restoreHome = false } = {}) => {
     savePosition()
@@ -561,7 +574,7 @@ function App() {
       }
 
       if (reducedMotion || (route.type === 'home' && homeSeen.current)) {
-        gsap.set('.hero-opening-curtain', { scaleX: 0 })
+        if (isHome) gsap.set('.hero-opening-curtain', { scaleX: 0 })
         return
       }
 
@@ -571,7 +584,6 @@ function App() {
         opening
           .set('.hero-opening-curtain', { scaleX: 1, transformOrigin: 'left center' })
           .fromTo('.geometry-stage', { opacity: .2 }, { opacity: 1, duration: 1.8, ease: 'power2.out' }, .05)
-          .fromTo('.site-header', { y: -24, opacity: 0 }, { y: 0, opacity: 1, duration: 1.15 }, .2)
           .fromTo('.hero-eyebrow', { x: -26, opacity: 0 }, { x: 0, opacity: 1, duration: 1.05 }, .55)
           .fromTo('.hero-title-mask', { yPercent: 112, scaleX: .86, opacity: 0 }, { yPercent: 0, scaleX: 1, opacity: 1, duration: 1.55, stagger: .18, ease: 'power4.out' }, .62)
           .to('.hero-opening-curtain', { scaleX: 0, duration: 1.65, ease: 'power4.inOut' }, .7)
@@ -639,6 +651,19 @@ function App() {
     }
     return () => document.documentElement.removeAttribute('data-subpage')
   }, [route])
+
+  useEffect(() => {
+    if (focusedEntry.current === entry.current) return
+    if (route.type === 'home') {
+      if (homeFocus.current?.isConnected) homeFocus.current.focus({ preventScroll: true })
+    } else {
+      const heading = subpageRef.current?.querySelector('h1')
+      if (!heading) return
+      heading.setAttribute('tabindex', '-1')
+      heading.focus({ preventScroll: true })
+    }
+    focusedEntry.current = entry.current
+  }, [route, contentState])
 
   return (
     <main ref={mainRef}>
@@ -713,8 +738,7 @@ function App() {
       {mobileMenuOpen && <button className="mobile-menu-scrim" onClick={() => setMobileMenuOpen(false)} aria-label={language === 'en' ? 'Close menu backdrop' : '关闭菜单背景'} />}
 
       {route.type !== 'home' && <div className="route-page" ref={subpageRef} onScroll={event => positions.current.set(entry.current, event.currentTarget.scrollTop)}>
-      {route.type === 'admin' ? <Admin onContent={(data) => setProjects(data.projects)} /> : route.type === 'detail' ? (
-        <ProjectDetail
+      {route.type === 'admin' ? <Suspense fallback={<p className="content-status" role="status">正在打开管理页面…</p>}><Admin onContent={(data) => { setContent(data); setContentState('ready') }} /></Suspense> : route.type === 'detail' ? (contentState !== 'ready' ? contentStatus : <ProjectDetail
           projects={projects}
           project={projects.find((project) => project.id === route.projectId)}
           onHome={() => returnHome('projects')}
@@ -723,12 +747,12 @@ function App() {
           language={language}
         />
       ) : route.type === 'imaging' ? (
-        <PhotoGallery onHome={() => returnHome('imaging')} language={language} />
-      ) : null}
+        <PhotoGallery onHome={() => returnHome('imaging')} language={language} photos={content.photos} status={contentStatus} />
+      ) : <section className="project-detail shell"><h1>页面不存在</h1><button onClick={() => goHome()}>返回首页</button></section>}
       </div>}
       <div className="home-page" inert={route.type !== 'home'} aria-hidden={route.type !== 'home'} data-covered={route.type !== 'home'}>
       <section className="hero" id="home" aria-labelledby="hero-title">
-        <GeometryHero />
+        <GeometryHero active={route.type === 'home'} />
         <div className="hero-veil" />
         <div className="hero-opening-curtain" aria-hidden="true" />
         <div className="hero-content shell">
@@ -761,6 +785,7 @@ function App() {
           </div>
         </div>
 
+        {contentStatus}
         <div className="project-grid selected-grid shell">
           {projects.filter((project) => project.featured).map((project) => <ProjectCard key={project.id} project={project} language={language} onNavigate={goTo} featured />)}
         </div>
