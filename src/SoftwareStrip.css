@@ -22,3 +22,9 @@
 }
 
 .software-strip[data-dragging="true"] { cursor: grabbing; }
+
+.kfc-trigger { padding: 0; border: 0; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+.kfc-trigger:hover { transform: rotate(-9deg) scale(1.12); box-shadow: 0 0 0 3px #e4002b22; }
+.kfc-trigger:focus-visible { outline: 2px solid #e4002b; outline-offset: 4px; }
+.software-strip[data-egg-open="true"] .software-track, .software-strip:has(.kfc-trigger:focus-visible) .software-track { animation-play-state: paused; }
+.kfc-loading { position: fixed; z-index: 100; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 14px 22px; border-radius: 8px; background: #e4002b; color: #fff9ef; font-size: 13px; box-shadow: 0 8px 30px #0003; }

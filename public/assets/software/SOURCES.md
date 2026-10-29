@@ -19,3 +19,5 @@ Simple Icons source is CC0: https://github.com/simple-icons/simple-icons/blob/de
 
 - 3ds Max: Devicon vector mark, `https://github.com/devicons/devicon/blob/master/icons/threedsmax/threedsmax-original.svg` (upstream Devicon license applies; brand trademark rights are separate).
 - VMware ESXi: `https://github.com/homarr-labs/dashboard-icons/blob/main/svg/vmware-esxi.svg`. Dashboard Icons assets: see the upstream [license](https://github.com/homarr-labs/dashboard-icons/blob/main/LICENSE); trademark rights remain with their owners.
+
+- KFC (hidden fictional résumé Easter egg): `https://github.com/simple-icons/simple-icons/blob/develop/icons/kfc.svg`, brand red applied. This is a playful personal Easter egg, not an official endorsement.
