@@ -351,7 +351,7 @@ function MusicPlayer({ language }) {
   )
 }
 
-function ProjectDetail({ project, projects, onHome, onBack, language }) {
+function ProjectDetail({ project, projects, onHome, onBack, onNavigate, language }) {
   const text = copy[language]
   if (!project) {
     return (
@@ -421,7 +421,7 @@ function ProjectDetail({ project, projects, onHome, onBack, language }) {
         <p className="eyebrow"><span /> {text.endProject}</p>
         <div className="detail-end-actions">
           <button className="detail-back" onClick={onHome}>{text.returnWorks}</button>
-          <a className="detail-next" href={`/works/${projects[(projects.indexOf(project) + 1) % projects.length].id}`}>{language === 'en' ? 'Next project' : '下一个项目'} · {localized(projects[(projects.indexOf(project) + 1) % projects.length], 'title', language)} <ArrowUpRight size={17} /></a>
+          <a className="detail-next" onClick={event => { if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); onNavigate(event.currentTarget.getAttribute('href')) }} href={`/works/${projects[(projects.indexOf(project) + 1) % projects.length].id}`}>{language === 'en' ? 'Next project' : '下一个项目'} · {localized(projects[(projects.indexOf(project) + 1) % projects.length], 'title', language)} <ArrowUpRight size={17} /></a>
         </div>
       </div>
     </section>
@@ -438,6 +438,11 @@ function App() {
   const theme = useSyncExternalStore(subscribeTheme, getTheme)
   const mainRef = useRef(null)
   const text = copy[language]
+  const homeSeen = useRef(false)
+  const positions = useRef(new Map())
+  const entry = useRef(window.history.state?.portfolioKey || 'initial')
+  const pendingPosition = useRef(null)
+  const homePosition = useRef(null)
 
   useEffect(() => {
     window.localStorage.setItem('crtyss-language', language)
@@ -447,14 +452,22 @@ function App() {
       : (language === 'en' ? 'Crtyss - Product Designer' : 'Crtyss - 产品设计师')
   }, [language, route.type])
 
-  const goTo = (path, { scrollTo } = {}) => {
-    window.history.pushState({}, '', path)
+  const savePosition = () => {
+    positions.current.set(entry.current, window.scrollY)
+    if (route.type === 'home') homePosition.current = window.scrollY
+  }
+  const goTo = (path, { scrollTo, restoreHome = false } = {}) => {
+    savePosition()
+    entry.current = `page-${Date.now()}-${Math.random()}`
+    window.history.pushState({ portfolioKey: entry.current }, '', path)
+    pendingPosition.current = restoreHome && homePosition.current !== null
+      ? { top: homePosition.current } : scrollTo ? { section: scrollTo } : { top: 0 }
     setRoute(readRoute())
     setActiveProject(null)
-    if (scrollTo) window.setTimeout(() => scrollToId(scrollTo), 0)
+    setMobileMenuOpen(false)
   }
-
-  const goHome = (sectionId) => goTo('/', sectionId ? { scrollTo: sectionId } : {})
+  const goHome = (sectionId) => goTo('/', sectionId ? { scrollTo: sectionId } : { scrollTo: 'home' })
+  const returnHome = section => goTo('/', { restoreHome: true, scrollTo: section })
 
   const navigateToSection = (id) => {
     setMobileMenuOpen(false)
@@ -469,19 +482,25 @@ function App() {
   }
 
   useEffect(() => {
+    const previous = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    window.history.replaceState({ ...window.history.state, portfolioKey: entry.current }, '')
+    const save = () => positions.current.set(entry.current, window.scrollY)
     const onPopState = () => {
+      entry.current = window.history.state?.portfolioKey || 'initial'
+      pendingPosition.current = { top: positions.current.get(entry.current) || 0 }
       setRoute(readRoute())
       setActiveProject(null)
       setMobileMenuOpen(false)
     }
+    window.addEventListener('scroll', save, { passive: true })
     window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
+    return () => {
+      window.history.scrollRestoration = previous
+      window.removeEventListener('scroll', save)
+      window.removeEventListener('popstate', onPopState)
+    }
   }, [])
-
-  useEffect(() => {
-    if (route.type !== 'home') window.scrollTo({ top: 0, behavior: 'auto' })
-    setMobileMenuOpen(false)
-  }, [route])
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -536,12 +555,13 @@ function App() {
         })
       }
 
-      if (reducedMotion) {
+      if (reducedMotion || (route.type === 'home' && homeSeen.current)) {
         gsap.set('.hero-opening-curtain', { scaleX: 0 })
         return
       }
 
       if (route.type === 'home') {
+        homeSeen.current = true
         const opening = gsap.timeline({ defaults: { ease: 'power3.out' } })
         opening
           .set('.hero-opening-curtain', { scaleX: 1, transformOrigin: 'left center' })
@@ -587,6 +607,33 @@ function App() {
 
     return () => context.revert()
   }, [route.type, route.projectId, projects])
+
+  useLayoutEffect(() => {
+    const target = pendingPosition.current
+    if (!target) return
+    pendingPosition.current = null
+    const app = mainRef.current
+    const apply = () => {
+      if (target.section) {
+        const element = document.getElementById(target.section)
+        if (element) window.scrollTo({ top: Math.max(0, element.getBoundingClientRect().top + window.scrollY - parseFloat(getComputedStyle(element).scrollMarginTop || '0')), behavior: 'instant' })
+      } else window.scrollTo({ top: target.top, behavior: 'instant' })
+    }
+    apply()
+    const frame = requestAnimationFrame(() => { apply(); ScrollTrigger.refresh() })
+    const stop = () => app.removeEventListener('load', apply, true)
+    app.addEventListener('load', apply, true)
+    window.addEventListener('wheel', stop, { once: true, passive: true })
+    window.addEventListener('touchstart', stop, { once: true, passive: true })
+    window.addEventListener('keydown', stop, { once: true })
+    const timeout = setTimeout(stop, 3000)
+    return () => {
+      cancelAnimationFrame(frame); clearTimeout(timeout); stop()
+      window.removeEventListener('wheel', stop)
+      window.removeEventListener('touchstart', stop)
+      window.removeEventListener('keydown', stop)
+    }
+  }, [route])
 
   return (
     <main ref={mainRef}>
@@ -664,12 +711,13 @@ function App() {
         <ProjectDetail
           projects={projects}
           project={projects.find((project) => project.id === route.projectId)}
-          onHome={() => goHome('projects')}
-          onBack={() => goHome('projects')}
+          onHome={() => returnHome('projects')}
+          onNavigate={goTo}
+          onBack={() => returnHome('projects')}
           language={language}
         />
       ) : route.type === 'imaging' ? (
-        <PhotoGallery onHome={() => goHome('imaging')} language={language} />
+        <PhotoGallery onHome={() => returnHome('imaging')} language={language} />
       ) : <>
       <section className="hero" id="home" aria-labelledby="hero-title">
         <GeometryHero />
