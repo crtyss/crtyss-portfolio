@@ -1,0 +1,22 @@
+/* Shared by the DOM and the 3D renderer, including before React mounts. */
+:root {
+  --page-bg: #101214;
+  --page-text: #f3f3f2;
+  --hero-bg: #121416;
+  --hero-veil: rgba(18,20,22,.24);
+  color-scheme: dark;
+  background: var(--page-bg);
+}
+:root[data-theme='light'] {
+  --page-bg: #f3f3f2;
+  --page-text: #242426;
+  --hero-bg: #ecece8;
+  --hero-veil: rgba(236,236,232,.2);
+  color-scheme: light;
+}
+
+/* Theme colors commit in one frame. Hover/interaction transitions resume afterwards. */
+html[data-theme-committing],
+html[data-theme-committing] *,
+html[data-theme-committing] *::before,
+html[data-theme-committing] *::after { transition: none !important; }

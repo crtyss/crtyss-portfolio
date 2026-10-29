@@ -1,0 +1,33 @@
+import { useEffect, useState } from 'react'
+import { api, loadContent, uploadImage } from './content-api'
+import './Admin.css'
+const empty = type => type === 'projects'
+  ? { id: '', title: '', titleEn: '', category: '', categoryEn: '', year: String(new Date().getFullYear()), summary: '', summaryEn: '', english: '', image: '', gallery: [], featured: false, number: '' }
+  : { id: '', title: '', titleEn: '', category: 'nature', description: '', src: '', thumbnail: '', width: 1, height: 1 }
+export default function Admin({ onContent }) {
+  const [loggedIn, setLoggedIn] = useState(false), [checking, setChecking] = useState(true)
+  const [password, setPassword] = useState(''), [content, setContent] = useState({ projects: [], photos: [] })
+  const [type, setType] = useState('projects'), [draft, setDraft] = useState(null)
+  const [busy, setBusy] = useState(false), [error, setError] = useState(''), [notice, setNotice] = useState('')
+  const updateContent = data => { setContent(data); onContent(data) }
+  useEffect(() => { api('/api/admin/session').then(data => { setLoggedIn(data.authenticated); if (data.authenticated) return loadContent().then(updateContent) }).catch(() => setError('后台未连接，请先启动管理服务。')).finally(() => setChecking(false)) }, [])
+  const run = async task => { setBusy(true); setError(''); setNotice(''); try { await task() } catch (e) { setError(e.message) } finally { setBusy(false) } }
+  const field = (key, label, multiline = false) => <label>{label}{multiline ? <textarea value={draft[key] || ''} onChange={e => setDraft({ ...draft, [key]: e.target.value })} /> : <input value={draft[key] || ''} onChange={e => setDraft({ ...draft, [key]: e.target.value })} />}</label>
+  return <section className="admin-page shell">
+    <header><p className="eyebrow">CRTYSS / PRIVATE STUDIO</p><h1>作品管理</h1><p>管理产品与摄影作品，保存后公开页面即更新。</p></header>
+    {error && <p className="admin-error" role="alert">{error}</p>}{notice && <p className="admin-notice" role="status">{notice}</p>}
+    {checking ? <p>正在连接后台…</p> : !loggedIn ? <form className="admin-login" onSubmit={e => { e.preventDefault(); run(async () => { await api('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) }); setPassword(''); updateContent(await loadContent()); setLoggedIn(true) }) }}><label>管理员密码<input type="password" autoComplete="current-password" required value={password} onChange={e => setPassword(e.target.value)} /></label><button disabled={busy}>登录管理后台</button><p>仅管理员可登录。访客无法添加或修改作品。</p></form> : <>
+      <div className="admin-toolbar"><div>{[['projects', '产品'], ['photos', '画廊']].map(([key, label]) => <button key={key} aria-pressed={type === key} onClick={() => { setType(key); setDraft(null); setError(''); setNotice('') }}>{label} · {content[key].length}</button>)}</div><button onClick={() => setDraft(empty(type))}>＋ 添加{type === 'projects' ? '产品' : '摄影作品'}</button><button onClick={() => run(async () => { await api('/api/admin/logout', { method: 'POST' }); setLoggedIn(false); setDraft(null) })}>退出登录</button></div>
+      {draft ? <form className="admin-editor" onSubmit={e => { e.preventDefault(); run(async () => { const id = draft.id || 'work-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8); updateContent(await api(`/api/admin/${type}/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...draft, number: draft.number || String(content.projects.length + 1).padStart(2, '0') }) })); setDraft(null); setNotice('已保存，公开页面已更新。') }) }}>
+        <h2>{draft.id ? '编辑作品' : '添加作品'}</h2><fieldset disabled={busy}>
+        <div className="admin-fields">{field('title', '作品标题 *')}{field('titleEn', '英文标题（选填）')}
+        {type === 'projects' ? <>{field('category', '分类')}{field('categoryEn', '英文分类（选填）')}{field('year', '年份')}{field('number', '展示编号')}{field('english', '英文副标题（选填）')}{field('summary', '产品介绍', true)}{field('summaryEn', '英文介绍（选填）', true)}<label className="admin-checkbox"><input type="checkbox" checked={draft.featured} onChange={e => setDraft({ ...draft, featured: e.target.checked })} />列入精选作品</label></> : <><label>分类<select value={draft.category} onChange={e => setDraft({ ...draft, category: e.target.value })}><option value="nature">自然风景</option><option value="urban">城市人文</option><option value="other">其他</option></select></label>{field('description', '作品描述', true)}</>}
+        </div><label>上传{type === 'projects' ? '产品封面' : '摄影作品'}（JPG / PNG / WebP，最大 25 MB）<input type="file" accept="image/jpeg,image/png,image/webp" onChange={e => { const file = e.target.files[0]; if (file) run(async () => { const image = await uploadImage(file); setDraft(current => ({ ...current, ...(type === 'projects' ? { image: image.src } : image) })) }) }} /></label>
+        {(draft.image || draft.src) && <img className="admin-preview" src={draft.image || draft.src} alt="封面预览" />}
+        {type === 'projects' && <><label>添加详情图片（可多选，上传顺序即展示顺序）<input type="file" multiple accept="image/jpeg,image/png,image/webp" onChange={e => { const files = [...e.target.files]; run(async () => { const images = []; for (const file of files) images.push((await uploadImage(file)).src); setDraft(current => ({ ...current, gallery: [...current.gallery, ...images] })) }) }} /></label><div className="admin-images">{draft.gallery.map((src, index) => <div key={index}><img src={src} alt={`详情 ${index + 1}`} /><div><button type="button" disabled={index === 0} onClick={() => setDraft(current => { const gallery = [...current.gallery]; [gallery[index - 1], gallery[index]] = [gallery[index], gallery[index - 1]]; return { ...current, gallery } })}>前移</button><button type="button" onClick={() => setDraft({ ...draft, gallery: draft.gallery.filter((_, i) => i !== index) })}>移除</button></div></div>)}</div></>}
+        <div className="admin-form-actions"><button type="submit">保存并发布</button><button type="button" onClick={() => setDraft(null)}>取消编辑</button></div></fieldset>
+      </form> : <div className="admin-list">{content[type].map(item => <article key={item.id}><img src={item.thumbnail || item.image || item.src} alt="" /><div><h2>{item.title}</h2><p>{item.category} {item.year} {item.featured && ' · 精选'}</p></div><button disabled={busy} onClick={() => { setDraft({ ...item }); setNotice('') }}>编辑</button><button disabled={busy} onClick={() => { if (window.confirm(`确定删除「${item.title}」？删除后公开页面将不再展示。`)) run(async () => { updateContent(await api(`/api/admin/${type}/${item.id}`, { method: 'DELETE' })); setNotice('作品已删除。') }) }}>删除</button></article>)}{!content[type].length && <p>这里还没有作品，点击上方按钮添加。</p>}</div>}
+      {busy && <p role="status">正在处理，请稍候…</p>}
+    </>}
+  </section>
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "photo-01",
+    "src": "/assets/photography/photo-01.jpg",
+    "thumbnail": "/assets/photography/photo-01-thumb.webp",
+    "width": 1168,
+    "height": 1752,
+    "title": "旷野",
+    "titleEn": "Open country",
+    "category": "nature"
+  },
+  {
+    "id": "photo-02",
+    "src": "/assets/photography/photo-02.jpg",
+    "thumbnail": "/assets/photography/photo-02-thumb.webp",
+    "width": 1621,
+    "height": 1080,
+    "title": "驶入旷野",
+    "titleEn": "Into the open",
+    "category": "nature"
+  },
+  {
+    "id": "photo-03",
+    "src": "/assets/photography/photo-03.jpg",
+    "thumbnail": "/assets/photography/photo-03-thumb.webp",
+    "width": 1620,
+    "height": 1080,
+    "title": "在路上",
+    "titleEn": "On the road",
+    "category": "nature"
+  },
+  {
+    "id": "photo-04",
+    "src": "/assets/photography/photo-04.jpg",
+    "thumbnail": "/assets/photography/photo-04-thumb.webp",
+    "width": 1742,
+    "height": 1161,
+    "title": "河流的弧线",
+    "titleEn": "A river’s curve",
+    "category": "nature"
+  },
+  {
+    "id": "photo-05",
+    "src": "/assets/photography/photo-05.jpg",
+    "thumbnail": "/assets/photography/photo-05-thumb.webp",
+    "width": 1621,
+    "height": 1080,
+    "title": "森林交汇处",
+    "titleEn": "Where paths meet",
+    "category": "nature"
+  },
+  {
+    "id": "photo-06",
+    "src": "/assets/photography/photo-06.jpg",
+    "thumbnail": "/assets/photography/photo-06-thumb.webp",
+    "width": 1168,
+    "height": 1168,
+    "title": "草原来客",
+    "titleEn": "A quiet visitor",
+    "category": "nature"
+  },
+  {
+    "id": "photo-07",
+    "src": "/assets/photography/photo-07.jpg",
+    "thumbnail": "/assets/photography/photo-07-thumb.webp",
+    "width": 1154,
+    "height": 1154,
+    "title": "林间作业",
+    "titleEn": "Work by the woods",
+    "category": "nature"
+  },
+  {
+    "id": "photo-08",
+    "src": "/assets/photography/photo-08.jpg",
+    "thumbnail": "/assets/photography/photo-08-thumb.webp",
+    "width": 1621,
+    "height": 1080,
+    "title": "树海与远山",
+    "titleEn": "Forests and distant hills",
+    "category": "nature"
+  },
+  {
+    "id": "photo-09",
+    "src": "/assets/photography/photo-09.jpg",
+    "thumbnail": "/assets/photography/photo-09-thumb.webp",
+    "width": 1446,
+    "height": 1080,
+    "title": "日落之前",
+    "titleEn": "Before sunset",
+    "category": "nature"
+  },
+  {
+    "id": "photo-10",
+    "src": "/assets/photography/photo-10.jpg",
+    "thumbnail": "/assets/photography/photo-10-thumb.webp",
+    "width": 1621,
+    "height": 1080,
+    "title": "水的边界",
+    "titleEn": "The water’s edge",
+    "category": "nature"
+  },
+  {
+    "id": "photo-11",
+    "src": "/assets/photography/photo-11.jpg",
+    "thumbnail": "/assets/photography/photo-11-thumb.webp",
+    "width": 1621,
+    "height": 1080,
+    "title": "绿洲之间",
+    "titleEn": "Between the greens",
+    "category": "nature"
+  },
+  {
+    "id": "photo-12",
+    "src": "/assets/photography/photo-12.jpg",
+    "thumbnail": "/assets/photography/photo-12-thumb.webp",
+    "width": 1080,
+    "height": 1620,
+    "title": "河谷蜿蜒",
+    "titleEn": "Through the valley",
+    "category": "nature"
+  },
+  {
+    "id": "photo-13",
+    "src": "/assets/photography/photo-13.jpg",
+    "thumbnail": "/assets/photography/photo-13-thumb.webp",
+    "width": 1132,
+    "height": 1698,
+    "title": "街头的旋律",
+    "titleEn": "Street melodies",
+    "category": "urban"
+  },
+  {
+    "id": "photo-14",
+    "src": "/assets/photography/photo-14.jpg",
+    "thumbnail": "/assets/photography/photo-14-thumb.webp",
+    "width": 1080,
+    "height": 1620,
+    "title": "红墙与阶梯",
+    "titleEn": "Red walls and stairs",
+    "category": "urban"
+  },
+  {
+    "id": "photo-15",
+    "src": "/assets/photography/photo-15.jpg",
+    "thumbnail": "/assets/photography/photo-15-thumb.webp",
+    "width": 1661,
+    "height": 1107,
+    "title": "檐下",
+    "titleEn": "Under the eaves",
+    "category": "urban"
+  },
+  {
+    "id": "photo-16",
+    "src": "/assets/photography/photo-16.jpg",
+    "thumbnail": "/assets/photography/photo-16-thumb.webp",
+    "width": 1089,
+    "height": 1633,
+    "title": "光的棋盘",
+    "titleEn": "A chessboard of light",
+    "category": "urban"
+  },
+  {
+    "id": "photo-17",
+    "src": "/assets/photography/photo-17.jpg",
+    "thumbnail": "/assets/photography/photo-17-thumb.webp",
+    "width": 1157,
+    "height": 1735,
+    "title": "街角日常",
+    "titleEn": "An ordinary street",
+    "category": "urban"
+  },
+  {
+    "id": "photo-18",
+    "src": "/assets/photography/photo-18.jpg",
+    "thumbnail": "/assets/photography/photo-18-thumb.webp",
+    "width": 1621,
+    "height": 1080,
+    "title": "城市入暮",
+    "titleEn": "City at dusk",
+    "category": "urban"
+  }
+]

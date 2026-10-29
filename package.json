@@ -6,15 +6,22 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/prepare-static-routes.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "node server/index.mjs",
+    "admin:setup": "node scripts/setup-admin.mjs",
+    "dev:full": "node scripts/dev-with-admin.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
+    "express": "^5.3.0",
     "gsap": "^3.15.0",
     "lucide-react": "latest",
     "motion": "^13.1.1",
+    "multer": "^2.5.0",
     "react": "latest",
     "react-dom": "latest",
+    "sharp": "^0.35.5",
+    "three": "^0.186.1",
     "vite": "latest"
   }
 }
