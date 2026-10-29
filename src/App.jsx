@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GeometryHero from './GeometryHero'
 import PhotoGallery from './PhotoGallery'
 import initialProjects from './projects'
+import { projectHaptic } from './haptics'
 import Admin from './Admin'
 import { loadContent } from './content-api'
 import { getTheme, subscribeTheme, toggleTheme } from './theme'
@@ -105,6 +106,7 @@ function ProjectCard({ project, language, onNavigate, featured = false }) {
     <a className={`project-card tone-${project.tone}`} href={`/works/${project.id}`} onClick={(event) => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
       event.preventDefault()
+      projectHaptic(event)
       onNavigate(`/works/${project.id}`)
     }} aria-label={`${language === 'en' ? 'View project' : '查看项目'}: ${localized(project, 'title', language)}`}>
       <img src={project.image} alt="" loading="lazy" decoding="async" />
@@ -421,7 +423,7 @@ function ProjectDetail({ project, projects, onHome, onBack, onNavigate, language
         <p className="eyebrow"><span /> {text.endProject}</p>
         <div className="detail-end-actions">
           <button className="detail-back" onClick={onHome}>{text.returnWorks}</button>
-          <a className="detail-next" onClick={event => { if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); onNavigate(event.currentTarget.getAttribute('href')) }} href={`/works/${projects[(projects.indexOf(project) + 1) % projects.length].id}`}>{language === 'en' ? 'Next project' : '下一个项目'} · {localized(projects[(projects.indexOf(project) + 1) % projects.length], 'title', language)} <ArrowUpRight size={17} /></a>
+          <a className="detail-next" onClick={event => { if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); projectHaptic(event); onNavigate(event.currentTarget.getAttribute('href')) }} href={`/works/${projects[(projects.indexOf(project) + 1) % projects.length].id}`}>{language === 'en' ? 'Next project' : '下一个项目'} · {localized(projects[(projects.indexOf(project) + 1) % projects.length], 'title', language)} <ArrowUpRight size={17} /></a>
         </div>
       </div>
     </section>
