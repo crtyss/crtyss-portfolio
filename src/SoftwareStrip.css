@@ -1,4 +1,4 @@
-.software-strip { --software-item-width: 128px; --software-gap: 32px; margin-top: 22px; padding: 20px 0 18px; overflow: hidden; color: #63676d; border-block: 1px solid rgba(36,36,38,.18); mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
+.software-strip { --software-item-width: 128px; --software-gap: 32px; margin-top: 22px; padding: 20px 0 18px; overflow: hidden; cursor: grab; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; color: #63676d; border-block: 1px solid rgba(36,36,38,.18); mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
 .software-track { display: flex; width: max-content; animation: software-loop calc(var(--software-count) * 4.666667s) linear infinite; animation-play-state: paused; }
 .software-strip[data-playing="true"] .software-track { animation-play-state: running; }
 .software-group { display: flex; flex: 0 0 auto; align-items: center; gap: var(--software-gap); margin: 0; padding: 0 var(--software-gap) 0 0; list-style: none; }
@@ -8,7 +8,7 @@
 .software-icon-symbol { width: 40px; height: 40px; margin: 4px; border-radius: 10px; background: #f6f7f8; box-shadow: inset 0 0 0 1px rgba(18,20,24,.06); }
 .software-icon-symbol img { width: 27px; height: 27px; }
 .software-name { font-family: inherit; font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: .01em; white-space: nowrap; }
-.software-strip:hover .software-track, .software-strip:focus-within .software-track, .home-page[data-covered="true"] .software-track { animation-play-state: paused; }
+.software-strip[data-dragging="true"] .software-track, .software-strip:focus-visible .software-track, .home-page[data-covered="true"] .software-track { animation-play-state: paused; }
 .software-strip:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
 @keyframes software-loop { to { transform: translateX(-50%); } }
 @media (max-width: 600px) {
@@ -20,3 +20,5 @@
   .software-track { animation: none; }
   .software-group[aria-hidden="true"] { display: none; }
 }
+
+.software-strip[data-dragging="true"] { cursor: grabbing; }

@@ -69,7 +69,7 @@ test('direct admin avoids Three.js; visible home loads device-specific PBR maps'
   await expect(page.locator('.geometry-canvas')).toHaveAttribute('data-renderer', 'pbr', { timeout: 20000 })
   expect(requests.some(url => url.includes('/materials/mobile/'))).toBe(testInfo.project.name === 'mobile')
 })
-test('software icons loop seamlessly, pause and respect reduced motion', async ({ page }) => {
+test('software icons loop seamlessly and respect reduced motion', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/')
   const strip = page.locator('.software-strip')
@@ -82,7 +82,7 @@ test('software icons loop seamlessly, pause and respect reduced motion', async (
   const track = strip.locator('.software-track')
   await expect(track).toHaveCSS('animation-play-state', 'running')
   await strip.hover()
-  await expect(track).toHaveCSS('animation-play-state', 'paused')
+  await expect(track).toHaveCSS('animation-play-state', 'running')
   const seam = await strip.evaluate(el => {
     const track = el.querySelector('.software-track'), animation = track.getAnimations()[0]
     animation.pause(); animation.currentTime = 0
@@ -95,4 +95,47 @@ test('software icons loop seamlessly, pause and respect reduced motion', async (
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await expect(track).toHaveCSS('animation-name', 'none')
   await expect(strip.locator('.software-group').nth(1)).toBeHidden()
+})
+
+test('dragging software icons resumes the loop at the released position', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const strip = page.locator('.software-strip'), track = strip.locator('.software-track')
+  await strip.scrollIntoViewIfNeeded()
+  await expect(strip).toHaveAttribute('data-playing', 'true')
+  const box = await strip.boundingBox()
+  await page.mouse.move(box.x + box.width * .7, box.y + box.height / 2)
+  await page.mouse.down()
+  await expect(track).toHaveCSS('animation-play-state', 'paused')
+  const before = await track.evaluate(el => Number(el.getAnimations()[0].currentTime))
+  await page.mouse.move(box.x + box.width * .7 - 150, box.y + box.height / 2, { steps: 8 })
+  const moved = await track.evaluate(el => Number(el.getAnimations()[0].currentTime))
+  expect(moved).not.toBe(before)
+  await page.mouse.up()
+  await expect(track).toHaveCSS('animation-play-state', 'running')
+  const released = await track.evaluate(el => Number(el.getAnimations()[0].currentTime))
+  expect(Math.abs(released - moved)).toBeLessThan(250)
+  await expect.poll(() => track.evaluate(el => Number(el.getAnimations()[0].currentTime))).toBeGreaterThan(released)
+  await expect(strip).not.toHaveAttribute('data-dragging', 'true')
+})
+test('touch dragging preserves vertical page scrolling', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'Touch device only')
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const strip = page.locator('.software-strip')
+  await strip.scrollIntoViewIfNeeded()
+  const box = await strip.boundingBox(), x = box.x + box.width * .7, y = box.y + box.height / 2
+  const cdp = await page.context().newCDPSession(page)
+  const gesture = async (dx, dy) => {
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] })
+    for (let i = 1; i <= 8; i++) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + dx * i / 8, y: y + dy * i / 8 }] })
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+  }
+  await gesture(-120, 0)
+  await expect(strip.locator('.software-track')).toHaveCSS('animation-play-state', 'running')
+  await expect(strip).not.toHaveAttribute('data-dragging', 'true')
+  const before = await page.evaluate(() => scrollY)
+  await gesture(0, -100)
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before + 20)
+  await cdp.detach()
 })
