@@ -698,11 +698,9 @@ function App() {
               : (language === 'en' ? 'Switch to dark mode' : '切换到深色模式')}
           >
             <span className="theme-toggle-track" aria-hidden="true">
-              <Moon className="theme-toggle-icon theme-toggle-moon" size={12} />
-              <Sun className="theme-toggle-icon theme-toggle-sun" size={12} />
-              <span className="theme-toggle-thumb">
-              {theme === 'dark' ? <Moon size={12} /> : <Sun size={12} />}
-              </span>
+              <span className="theme-toggle-thumb" />
+              <span className="theme-toggle-option theme-toggle-sun"><Sun size={14} strokeWidth={1.8} /></span>
+              <span className="theme-toggle-option theme-toggle-moon"><Moon size={14} strokeWidth={1.8} /></span>
             </span>
           </button>
           <button className="contact-button" data-cursor-interactive data-cursor-magnetic onClick={() => navigateToSection('contact')}>
