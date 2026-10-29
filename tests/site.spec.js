@@ -74,7 +74,7 @@ test('software icons loop seamlessly, pause and respect reduced motion', async (
   await page.goto('/')
   const strip = page.locator('.software-strip')
   await strip.scrollIntoViewIfNeeded()
-  await expect(strip.locator('.software-group').first().locator('li')).toHaveCount(12)
+  await expect(strip.locator('.software-group').first().locator('li')).toHaveCount(14)
   await expect(strip.locator('.software-group').nth(1)).toHaveAttribute('aria-hidden', 'true')
   await strip.locator('img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode() })))
   await expect(strip).toHaveAttribute('data-playing', 'true')

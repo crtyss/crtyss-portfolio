@@ -16,3 +16,6 @@ These assets identify software used by the portfolio owner. Product names and ma
 - OBS Studio: installed OBS application icon (`AppIcon.icns`).
 
 Simple Icons source is CC0: https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md . Brand trademark rights are separate. Bitmap assets were converted to PNG and reduced to a maximum of 128 px for web display. Assets are served locally; visitors do not contact these external sources.
+
+- 3ds Max: Devicon vector mark, `https://github.com/devicons/devicon/blob/master/icons/threedsmax/threedsmax-original.svg` (upstream Devicon license applies; brand trademark rights are separate).
+- VMware ESXi: `https://github.com/homarr-labs/dashboard-icons/blob/main/svg/vmware-esxi.svg`. Dashboard Icons assets: see the upstream [license](https://github.com/homarr-labs/dashboard-icons/blob/main/LICENSE); trademark rights remain with their owners.

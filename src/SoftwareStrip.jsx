@@ -6,6 +6,7 @@ const software = [
   ['davinci', 'DaVinci Resolve', 'davinci-resolve.png'],
   ['fcpx', 'Final Cut Pro', 'final-cut-pro.png'],
   ['rhino', 'Rhino', 'rhino.png'],
+  ['3ds-max', '3ds Max', '3ds-max.svg', true],
   ['keyshot', 'KeyShot', 'keyshot.png'],
   ['unity', 'Unity', 'unity.svg', true],
   ['blender', 'Blender', 'blender.svg', true],
@@ -14,6 +15,7 @@ const software = [
   ['js-design', '即时设计', 'js-design.png'],
   ['bambu', 'Bambu Studio', 'bambulab.png'],
   ['obs', 'OBS Studio', 'obs.png'],
+  ['esxi', 'VMware ESXi', 'vmware-esxi.svg', true],
 ]
 
 export default function SoftwareStrip({ label }) {
@@ -28,7 +30,7 @@ export default function SoftwareStrip({ label }) {
     return () => { observer.disconnect(); document.removeEventListener('visibilitychange', update) }
   }, [])
   return (
-    <div className="software-strip" ref={ref} role="region" aria-label={label} tabIndex={0} data-playing={playing}>
+    <div className="software-strip" ref={ref} role="region" aria-label={label} tabIndex={0} data-playing={playing} style={{ '--software-count': software.length }}>
       <div className="software-track">
         {[0, 1].map(copy => <ul key={copy} className="software-group" aria-hidden={copy === 1 ? true : undefined}>
           {software.map(([id, name, image, symbol]) => <li key={id} className="software-item">
