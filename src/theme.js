@@ -2,7 +2,7 @@ import { flushSync } from 'react-dom'
 
 const root = document.documentElement
 const listeners = new Set()
-let currentTheme = root.dataset.theme === 'light' ? 'light' : 'dark'
+let currentTheme = root.dataset.theme === 'dark' ? 'dark' : 'light'
 
 export const getTheme = () => currentTheme
 export function subscribeTheme(listener) {

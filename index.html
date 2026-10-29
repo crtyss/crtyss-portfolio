@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101214" />
+    <meta name="theme-color" content="#f3f3f2" />
     <script>
       (() => {
-        let theme = 'dark'
-        try { if (localStorage.getItem('crtyss-theme') === 'light') theme = 'light' } catch {}
+        let theme = 'light'
+        try { if (localStorage.getItem('crtyss-theme') === 'dark') theme = 'dark' } catch {}
         document.documentElement.dataset.theme = theme
         document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f3f3f2' : '#101214'
       })()

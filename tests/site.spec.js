@@ -37,8 +37,20 @@ test('persistent home, project metadata, theme and history', async ({ page }) =>
   await page.goBack()
   await expect(page.locator('.route-page')).toHaveCount(0)
   await page.locator('.theme-toggle').click()
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   expect(warnings).toEqual([])
+})
+test('first visit defaults to light and remembers a chosen dark theme', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f3f3f2')
+  await page.locator('.theme-toggle').click()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await page.locator('.theme-toggle').click()
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
 })
 test('lazy admin and authenticated content changes across sessions', async ({ page, request }) => {
   const adminLoads = []
