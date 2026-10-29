@@ -69,3 +69,30 @@ test('direct admin avoids Three.js; visible home loads device-specific PBR maps'
   await expect(page.locator('.geometry-canvas')).toHaveAttribute('data-renderer', 'pbr', { timeout: 20000 })
   expect(requests.some(url => url.includes('/materials/mobile/'))).toBe(testInfo.project.name === 'mobile')
 })
+test('software icons loop seamlessly, pause and respect reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const strip = page.locator('.software-strip')
+  await strip.scrollIntoViewIfNeeded()
+  await expect(strip.locator('.software-group').first().locator('li')).toHaveCount(12)
+  await expect(strip.locator('.software-group').nth(1)).toHaveAttribute('aria-hidden', 'true')
+  await strip.locator('img').evaluateAll(images => Promise.all(images.map(image => { image.loading = 'eager'; return image.decode() })))
+  await expect(strip).toHaveAttribute('data-playing', 'true')
+  await page.mouse.move(0, 0)
+  const track = strip.locator('.software-track')
+  await expect(track).toHaveCSS('animation-play-state', 'running')
+  await strip.hover()
+  await expect(track).toHaveCSS('animation-play-state', 'paused')
+  const seam = await strip.evaluate(el => {
+    const track = el.querySelector('.software-track'), animation = track.getAnimations()[0]
+    animation.pause(); animation.currentTime = 0
+    const start = el.querySelector('.software-group li').getBoundingClientRect().left
+    animation.currentTime = Number(animation.effect.getTiming().duration) - .01
+    return Math.abs(el.querySelectorAll('.software-group')[1].querySelector('li').getBoundingClientRect().left - start)
+  })
+  expect(seam).toBeLessThan(1)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false)
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await expect(track).toHaveCSS('animation-name', 'none')
+  await expect(strip.locator('.software-group').nth(1)).toBeHidden()
+})

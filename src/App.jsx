@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import GeometryHero from './GeometryHero'
 import PhotoGallery from './PhotoGallery'
+import SoftwareStrip from './SoftwareStrip'
 import { projectHaptic } from './haptics'
 import { pageMeta, updatePageMeta } from '../shared/page-meta'
 const Admin = lazy(() => import('./Admin'))
@@ -847,9 +848,7 @@ function App() {
             </article>
           ))}
         </div>
-        <div className="software-strip" aria-label={text.software}>
-          <span>RHINO</span><i /> <span>KEYSHOT</span><i /> <span>BLENDER</span><i /> <span>PHOTOSHOP</span><i /> <span>BAMBU STUDIO</span>
-        </div>
+        <SoftwareStrip label={text.software} />
       </section>
 
       <section className="imaging-section section imaging-compact" id="imaging" aria-labelledby="imaging-title">
