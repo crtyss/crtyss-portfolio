@@ -20,7 +20,7 @@ export default function KfcResume({ onClose, origin }) {
     <div className="kfc-icon-arrival" aria-hidden="true">
       <div className="kfc-arrival-ring" />
       <div className="kfc-arrival-ring kfc-arrival-ring-second" />
-      <img className="kfc-arrival-colonel" src="/assets/software/kfc-colonel.png" alt="" />
+      <img className="kfc-arrival-colonel" src="/assets/software/kfc-user.png" alt="" />
       <span className="kfc-arrival-caption">隐藏大佬 · 隆重登场</span>
     </div>
     <div className="kfc-burst" aria-hidden="true" />
@@ -29,7 +29,7 @@ export default function KfcResume({ onClose, origin }) {
     <article className="kfc-sheet">
       <button className="kfc-close" aria-label="关闭隐藏简历" onClick={onClose} autoFocus><X size={22} /></button>
       <header className="kfc-resume-header">
-        <div className="kfc-resume-masthead"><img src="/assets/software/kfc-colonel.png" alt="KFC" /><span>SECRET MENU<br />PERSONAL RÉSUMÉ / NO. 0050</span></div>
+        <div className="kfc-resume-masthead"><img src="/assets/software/kfc-user.png" alt="KFC" /><span>SECRET MENU<br />PERSONAL RÉSUMÉ / NO. 0050</span></div>
         <div className="kfc-sticker"><Star size={18} fill="currentColor" /><span>野生人才<br />限时掉落</span></div>
         <p className="kfc-name">CRTYSS · 又名 大卫·戴</p>
         <h1 id="kfc-resume-title">个人 KFC<br /><em>疯狂点餐专家</em></h1>

@@ -12,7 +12,7 @@ const software = [
   ['unity', 'Unity', 'unity.svg', true],
   ['blender', 'Blender', 'blender.svg', true],
   ['codex', 'Codex', 'codex.png'],
-  ['kfc', 'KFC', 'kfc-colonel.png', true],
+  ['kfc', 'KFC', 'kfc-user.png', true],
   ['deepseek', 'DeepSeek', 'deepseek.png'],
   ['js-design', '即时设计', 'js-design.png'],
   ['bambu', 'Bambu Studio', 'bambulab.png'],
