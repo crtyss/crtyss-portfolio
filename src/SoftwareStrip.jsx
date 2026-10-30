@@ -25,6 +25,7 @@ export default function SoftwareStrip({ label }) {
   const drag = useRef(null)
   const suppressClick = useRef(false)
   const [eggOpen, setEggOpen] = useState(false)
+  const [eggOrigin, setEggOrigin] = useState(null)
   const finishDrag = event => {
     const current = drag.current
     if (current && event?.pointerId != null && event.pointerId !== current.id) return
@@ -89,6 +90,8 @@ export default function SoftwareStrip({ label }) {
             {id === 'kfc' ? <button type="button" className="software-icon software-icon-symbol kfc-trigger" aria-label="KFC：打开隐藏个人简历" tabIndex={copy === 1 ? -1 : 0} onClick={event => {
               event.currentTarget.focus({ preventScroll: true })
               finishDrag()
+              const bounds = event.currentTarget.getBoundingClientRect()
+              setEggOrigin({ x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 })
               setEggOpen(true)
             }}><img src={`/assets/software/${image}`} alt="" width="40" height="40" loading="lazy" decoding="async" draggable="false" /></button> : <span className={`software-icon ${symbol ? 'software-icon-symbol' : ''}`} data-software={id}>
               <img src={`/assets/software/${image}`} alt="" width="40" height="40" loading="lazy" decoding="async" draggable="false" />
@@ -98,7 +101,7 @@ export default function SoftwareStrip({ label }) {
         </ul>)}
       </div>
     </div>
-    {eggOpen && <Suspense fallback={<div className="kfc-loading" role="status">正在为你加热隐藏履历…</div>}><KfcResume onClose={() => setEggOpen(false)} /></Suspense>}
+    {eggOpen && <Suspense fallback={<div className="kfc-loading" role="status">正在为你加热隐藏履历…</div>}><KfcResume origin={eggOrigin} onClose={() => setEggOpen(false)} /></Suspense>}
     </>
   )
 }

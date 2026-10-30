@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { X, ArrowUpRight, Star } from 'lucide-react'
 import './KfcResume.css'
 
-export default function KfcResume({ onClose }) {
+export default function KfcResume({ onClose, origin }) {
   const ref = useRef(null)
   const [hired, setHired] = useState(false)
   useEffect(() => {
@@ -16,7 +16,13 @@ export default function KfcResume({ onClose }) {
       if (focus?.isConnected) focus.focus({ preventScroll: true })
     }
   }, [])
-  return createPortal(<dialog ref={ref} className="kfc-resume" aria-labelledby="kfc-resume-title" onCancel={event => { event.preventDefault(); onClose() }} onClick={event => { if (event.target === ref.current) onClose() }}>
+  return createPortal(<dialog ref={ref} className="kfc-resume" style={{ '--kfc-origin-x': `${origin?.x ?? window.innerWidth / 2}px`, '--kfc-origin-y': `${origin?.y ?? window.innerHeight / 2}px` }} aria-labelledby="kfc-resume-title" onCancel={event => { event.preventDefault(); onClose() }} onClick={event => { if (event.target === ref.current) onClose() }}>
+    <div className="kfc-icon-arrival" aria-hidden="true">
+      <div className="kfc-arrival-ring" />
+      <div className="kfc-arrival-ring kfc-arrival-ring-second" />
+      <img className="kfc-arrival-colonel" src="/assets/software/kfc-colonel.png" alt="" />
+      <span className="kfc-arrival-caption">隐藏大佬 · 隆重登场</span>
+    </div>
     <div className="kfc-burst" aria-hidden="true" />
     <div className="kfc-flying-word kfc-flying-one" aria-hidden="true">THURSDAY!</div>
     <div className="kfc-flying-word kfc-flying-two" aria-hidden="true">V ME 50</div>

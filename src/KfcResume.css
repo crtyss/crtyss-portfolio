@@ -1,8 +1,25 @@
 body.kfc-resume-open { overflow: hidden; }
 .kfc-resume { --kfc-red: #e4002b; position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh; margin: 0; padding: clamp(24px,5vw,70px) 16px; overflow-y: auto; overflow-x: hidden; border: 0; background: #a9142d; color: #23201e; overscroll-behavior: contain; isolation: isolate; }
-.kfc-resume::backdrop { background: #a90024; }
+.kfc-resume::backdrop { background: transparent; }
+.kfc-resume { animation: kfc-stage-arrival 1s ease both; }
+.kfc-icon-arrival { position: fixed; inset: 0; z-index: 10; pointer-events: none; overflow: hidden; animation: kfc-arrival-exit 1.35s linear both; }
+.kfc-arrival-colonel { position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; margin: -36px; border-radius: 16px; box-shadow: 0 18px 60px #71001966; will-change: transform, opacity; animation: kfc-colonel-flight 1.2s cubic-bezier(.2,.75,.2,1) both; }
+.kfc-arrival-ring { position: absolute; left: 50%; top: 50%; width: 200px; height: 200px; margin: -100px; border: 3px solid #fff2ca; border-radius: 50%; box-shadow: 0 0 35px #fff2ca55, inset 0 0 35px #fff2ca33; animation: kfc-impact-ring .7s .48s cubic-bezier(.16,1,.3,1) both; }
+.kfc-arrival-ring-second { border-width: 1px; animation-delay: .62s; }
+.kfc-arrival-caption { position: absolute; left: 0; right: 0; top: calc(50% + 125px); color: #fff2ca; text-align: center; font-size: clamp(14px, 3vw, 21px); font-weight: 800; letter-spacing: .18em; animation: kfc-arrival-caption .65s .42s both; }
+@keyframes kfc-stage-arrival { 0%, 12% { background-color: transparent; } 65%, 100% { background-color: #a9142d; } }
+@keyframes kfc-colonel-flight {
+  0% { transform: translate(calc(var(--kfc-origin-x) - 50vw), calc(var(--kfc-origin-y) - 50dvh)) rotate(-24deg) scale(.55); opacity: 1; }
+  45% { transform: translate(0, -24px) rotate(720deg) scale(3.2); opacity: 1; }
+  62% { transform: translate(0, 0) rotate(708deg) scale(2.65); opacity: 1; }
+  78% { transform: translate(0, -6px) rotate(720deg) scale(2.85); opacity: 1; }
+  100% { transform: translate(0, 0) rotate(735deg) scale(7); opacity: 0; }
+}
+@keyframes kfc-impact-ring { from { transform: scale(.3); opacity: 0; } 15% { opacity: .8; } to { transform: scale(5); opacity: 0; } }
+@keyframes kfc-arrival-caption { from { opacity: 0; transform: translateY(20px); } 30%, 65% { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-10px); } }
+@keyframes kfc-arrival-exit { 0%, 90% { visibility: visible; } 100% { visibility: hidden; } }
 .kfc-burst { position: fixed; inset: -80vmax; z-index: -1; pointer-events: none; background: repeating-conic-gradient(from 12deg, #b51c34 0deg 12deg, #af192f 12deg 24deg); }
-.kfc-sheet { position: relative; width: min(100%, 820px); margin: 0 auto; background: #fff9ef; box-shadow: 15px 20px 0 #7f001b66, 0 30px 100px #71001966; animation: kfc-quiet-entry .38s cubic-bezier(.22,1,.36,1) both; }
+.kfc-sheet { position: relative; width: min(100%, 820px); margin: 0 auto; background: #fff9ef; box-shadow: 15px 20px 0 #7f001b66, 0 30px 100px #71001966; animation: kfc-quiet-entry .5s .88s cubic-bezier(.22,1,.36,1) both; }
 .kfc-sheet::before { content: ''; display: block; height: 15px; background: repeating-linear-gradient(90deg, #e4002b 0 45px, #fff9ef 45px 90px); }
 .kfc-sheet::after { content: ''; position: absolute; height: 16px; bottom: -15px; left: 0; right: 0; background: linear-gradient(135deg, #fff9ef 25%, transparent 25%) -8px 0/16px 16px,linear-gradient(225deg, #fff9ef 25%, transparent 25%) -8px 0/16px 16px; }
 .kfc-close { position: absolute; right: 18px; top: 28px; z-index: 5; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #fff6; border-radius: 50%; color: #fff; background: #aa0021; cursor: pointer; }
@@ -24,6 +41,6 @@ body.kfc-resume-open { overflow: hidden; }
 .kfc-flying-word { display: none; }
 @keyframes kfc-quiet-entry { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
 @media(max-width:600px) { .kfc-resume { padding: 18px 12px 40px; }.kfc-resume-header { padding: 26px 22px 28px; }.kfc-sheet-body { padding: 22px 22px 28px; }.kfc-close { right: 14px; top: 27px; width: 38px; height: 38px; }.kfc-resume-masthead { margin-bottom: 32px; }.kfc-resume-masthead img { width: 42px; height: 42px; }.kfc-resume-masthead span { font-size: 8px; }.kfc-sticker { width: 70px; height: 70px; right: 25px; top: 107px; font-size: 10px; }.kfc-sticker svg { width: 13px; height: 13px; }.kfc-name { max-width: 180px; font-size: 9px; letter-spacing: .8px; }.kfc-resume h1 { font-size: clamp(30px,8.6vw,48px); }.kfc-intro { font-size: 12px; }.kfc-tags span { font-size: 9px; }.kfc-resume h2 { font-size: 17px; }.kfc-stats strong { font-size: 34px; }.kfc-stats small { font-size: 9px; }.kfc-receipt-meta b { font-size: 12px; }.kfc-endorsement { padding: 16px; }.kfc-endorsement p { font-size: 18px; }.kfc-flying-word { display: none; } }
-@media(prefers-reduced-motion:reduce) { .kfc-resume *, .kfc-resume *::before, .kfc-resume *::after { animation: none !important; transition: none !important; } }
+@media(prefers-reduced-motion:reduce) { .kfc-resume, .kfc-resume *, .kfc-resume *::before, .kfc-resume *::after { animation: none !important; transition: none !important; } .kfc-icon-arrival { display: none; } }
 
 .kfc-resume-masthead img { object-fit: contain; padding: 0; }
