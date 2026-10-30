@@ -5,6 +5,7 @@ import GeometryHero from './GeometryHero'
 import PhotoGallery from './PhotoGallery'
 import SoftwareStrip from './SoftwareStrip'
 import { projectHaptic } from './haptics'
+import { projectBoards } from './project-boards'
 import { pageMeta, updatePageMeta } from '../shared/page-meta'
 const Admin = lazy(() => import('./Admin'))
 import { loadContent } from './content-api'
@@ -385,6 +386,16 @@ function ProjectDetail({ project, projects, onHome, onBack, onNavigate, language
             <p className="eyebrow"><span /> {project.number} / PRODUCT WORK</p>
             <h1>{localized(project, 'title', language)}</h1>
             <p className="detail-english">{language === 'en' ? project.english : project.english}</p>
+            {projectBoards[project.id]?.length > 0 && (
+              <nav className="detail-board-links" aria-label={language === 'en' ? 'Presentation boards' : '项目展板'}>
+                {projectBoards[project.id].map(board => (
+                  <a key={board.href} href={board.href} target="_blank" rel="noopener noreferrer"
+                    title={language === 'en' ? 'Preview in a new tab' : '在新标签页预览，可放大查看'}>
+                    {language === 'en' ? board.labelEn : board.label} <ArrowUpRight size={13} aria-hidden="true" />
+                  </a>
+                ))}
+              </nav>
+            )}
             <div className="detail-meta">
               <div><small>{text.category}</small><b>{localized(project, 'category', language)}</b></div>
               <div><small>{text.year}</small><b>{project.year}</b></div>

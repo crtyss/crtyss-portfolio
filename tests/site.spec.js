@@ -1,5 +1,34 @@
 import { test, expect } from '@playwright/test'
+import { projectBoards } from '../src/project-boards.js'
 const headers = { 'X-Admin-Request': '1', Origin: 'http://127.0.0.1:3111' }
+test('presentation board links belong to matching detail pages and open separately', async ({ page, request }) => {
+  await page.goto('/')
+  await expect(page.locator('.detail-board-links')).toHaveCount(0)
+  for (const [id, boards] of Object.entries(projectBoards)) {
+    await page.goto(`/works/${id}`)
+    const links = page.locator('.detail-board-links a')
+    await expect(links).toHaveCount(boards.length)
+    for (const [i, board] of boards.entries()) {
+      await expect(links.nth(i)).toHaveAttribute('href', board.href)
+      await expect(links.nth(i)).toHaveAttribute('target', '_blank')
+      const image = await request.get(board.href)
+      expect(image.status()).toBe(200)
+      expect(image.headers()['content-type']).toContain('image/jpeg')
+    }
+  }
+  const sourceUrl = page.url()
+  const popupPromise = page.waitForEvent('popup')
+  await page.locator('.detail-board-links a').first().click()
+  const popup = await popupPromise
+  await popup.waitForLoadState()
+  expect(popup.url()).toContain(projectBoards.gater[0].href)
+  expect(page.url()).toBe(sourceUrl)
+  await expect(popup.locator('img')).toBeVisible()
+  await popup.close()
+  await page.goto('/works/mouse')
+  await expect(page.locator('.project-detail h1')).toBeVisible()
+  await expect(page.locator('.detail-board-links')).toHaveCount(0)
+})
 test('real 404s and project-specific server metadata', async ({ request }) => {
   for (const path of ['/works/missing', '/works/%25invalid', '/assets/missing.js', '/uploads/missing.jpg', '/missing']) expect((await request.get(path)).status()).toBe(404)
   const html = await (await request.get('/works/mouse')).text()

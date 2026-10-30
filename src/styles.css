@@ -329,6 +329,10 @@ html[data-theme='light'] .music-player-tab-index { color: rgba(36,36,38,.46); }
 .detail-gallery-heading { display: flex; justify-content: space-between; align-items: center; padding: 0 0 28px; }
 .detail-gallery-heading .section-kicker { color: #76767b; }
 .detail-gallery-heading .section-kicker span { color: #242426; }
+.detail-board-links { display: flex; flex-wrap: wrap; column-gap: 22px; row-gap: 2px; margin-top: 20px; }
+.detail-board-links a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: inherit; opacity: .65; font-size: 12px; line-height: 1.6; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; transition: opacity .2s ease; }
+.detail-board-links a:hover, .detail-board-links a:focus-visible { opacity: 1; }
+.detail-board-links a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 2px; }
 .detail-gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; align-items: start; }
 .detail-gallery-item { position: relative; grid-column: span 6; margin: 0; overflow: hidden; background: #dddde0; border-radius: 5px; }
 .detail-gallery-item:first-child { grid-column: span 12; }
