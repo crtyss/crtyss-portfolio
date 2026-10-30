@@ -28,7 +28,7 @@ for attempt in {1..15}; do if curl -fsS http://127.0.0.1:3001/api/admin/session 
 curl -fsS http://127.0.0.1:3001/api/content >/dev/null
 install -m 644 "$base/deployment/nginx.conf" /etc/nginx/sites-available/lin-studio
 nginx -t
-rsync -a --chmod=D755,F644 --delay-updates "$release/dist/assets/" /var/www/lin-studio/assets/
+rsync -a --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r --delay-updates "$release/dist/assets/" /var/www/lin-studio/assets/
 install -m 644 "$release/dist/index.html" /var/www/lin-studio/index.html
 # Existing pre-rendered route copies must not shadow the new SPA entry point.
 for route in works imaging; do
