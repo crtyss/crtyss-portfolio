@@ -414,13 +414,6 @@ function ProjectDetail({ project, projects, onHome, onBack, onNavigate, language
           <p>{localized(project, 'summary', language)}</p>
         </div>
 
-        <section className="case-focus" aria-labelledby="case-focus-title">
-          <p className="eyebrow">DESIGN FOCUS</p>
-          <h2 id="case-focus-title">{language === 'en' ? 'The design direction' : '这个项目关注什么'}</h2>
-          <p>{language === 'en' ? 'Explore the relationship between form, context, and use through the visual details below.' : '从产品形态、使用场景与细节表达三个角度，阅读下方方案。'}</p>
-          <div className="case-topics">{(language === 'en' ? ['Form & proportion', 'Context of use', 'Product details'] : ['形态与比例', '使用场景', '产品细节']).map((topic) => <span key={topic}>{topic}</span>)}</div>
-          <a href="#project-visuals">{language === 'en' ? 'Explore the visual details' : '查看方案与视觉细节'} <ArrowDown size={16} /></a>
-        </section>
         <div className="detail-gallery-heading" id="project-visuals">
           <div className="section-kicker"><span>02</span><p>{text.visualRecord}</p></div>
           <span>{project.gallery?.length || 0} {text.images}</span>
