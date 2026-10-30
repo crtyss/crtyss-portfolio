@@ -3,10 +3,8 @@
 .software-strip[data-playing="true"] .software-track { animation-play-state: running; }
 .software-group { display: flex; flex: 0 0 auto; align-items: center; gap: var(--software-gap); margin: 0; padding: 0 var(--software-gap) 0 0; list-style: none; }
 .software-item { display: flex; flex: 0 0 var(--software-item-width); width: var(--software-item-width); flex-direction: column; align-items: center; justify-content: center; gap: 9px; }
-.software-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; }
-.software-icon img { display: block; width: 40px; height: 40px; object-fit: contain; user-select: none; }
-.software-icon-symbol { width: 40px; height: 40px; margin: 4px; border-radius: 10px; background: #f6f7f8; box-shadow: inset 0 0 0 1px rgba(18,20,24,.06); }
-.software-icon-symbol img { width: 27px; height: 27px; }
+.software-icon { box-sizing: border-box; display: grid; place-items: center; flex: 0 0 48px; width: 48px; height: 48px; margin: 0; padding: 6px; border: 0; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 1px rgba(18,20,24,.06), 0 1px 4px #0000000d; overflow: hidden; }
+.software-icon img { display: block; width: 36px; height: 36px; border-radius: 7px; object-fit: contain; user-select: none; }
 .software-name { font-family: inherit; font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: .01em; white-space: nowrap; }
 .software-strip[data-dragging="true"] .software-track, .software-strip:focus-visible .software-track, .home-page[data-covered="true"] .software-track { animation-play-state: paused; }
 .software-strip:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
@@ -23,17 +21,14 @@
 
 .software-strip[data-dragging="true"] { cursor: grabbing; }
 
-.kfc-trigger { padding: 0; border: 0; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
-.kfc-trigger:hover { transform: rotate(-9deg) scale(1.12); box-shadow: 0 0 0 3px #e4002b22; }
+.kfc-trigger { cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
 .kfc-trigger:focus-visible { outline: 2px solid #e4002b; outline-offset: 4px; }
 .software-strip[data-egg-open="true"] .software-track, .software-strip:has(.kfc-trigger:focus-visible) .software-track { animation-play-state: paused; }
 .kfc-loading { position: fixed; z-index: 100; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 14px 22px; border-radius: 8px; background: #e4002b; color: #fff9ef; font-size: 13px; box-shadow: 0 8px 30px #0003; }
 
 /* A quiet warm tint is the only visual hint for the hidden item. */
 .software-item-kfc .software-name { font-weight: 600; letter-spacing: .02em; background: linear-gradient(110deg,#9d4653,#a98a63,#a85e66,#9d4653); background-size: 220% 100%; background-clip: text; -webkit-background-clip: text; color: transparent; animation: kfc-color-flow 14s ease-in-out infinite alternate; }
-.kfc-trigger { background: #fff; box-shadow: 0 1px 4px #0000000d; }
 .kfc-trigger:hover { transform: translateY(-1px); box-shadow: 0 2px 7px #00000014; }
-.kfc-trigger img { width: 36px; height: 36px; border-radius: 7px; }
 html[data-theme='dark'] .software-item-kfc .software-name { background-image: linear-gradient(110deg,#d79ca4,#d8bd98,#d7a4ae,#d79ca4); }
 .software-strip:not([data-playing="true"]) .software-item-kfc .software-name, .home-page[data-covered="true"] .software-item-kfc .software-name { animation-play-state: paused; }
 @keyframes kfc-color-flow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
