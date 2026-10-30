@@ -47,7 +47,7 @@ const projects = [
     image: '/assets/portfolio/air.jpg',
     summary: '以静谧家居氛围为出发点，平衡净化功能、交互信息与空间质感。',
     summaryEn: 'Balancing purification, interaction, and spatial calm to make healthy air feel at home.',
-    gallery: ['/assets/portfolio/galleries/air-01.jpg', '/assets/portfolio/galleries/air-02.jpg', '/assets/portfolio/galleries/air-03.jpg', '/assets/portfolio/galleries/air-04.jpg', '/assets/portfolio/galleries/air-05.jpg'],
+    gallery: ['/assets/portfolio/galleries/air-02.jpg', '/assets/portfolio/galleries/air-03.jpg', '/assets/portfolio/galleries/air-04.jpg', '/assets/portfolio/galleries/air-05.jpg'],
     detailLayout: 'ambient',
     hasDetail: true,
     layout: 'project-wide',
